@@ -19,13 +19,11 @@ const userSchema = new mongoose.Schema({
    }
 });
 
-// Adding plugins to manage user's password field
+// Adding plugins to manage user's password field and adding useful methods on 
+// the UserModel object
 userSchema.plugin(passportLocalMongoose, { usernameField: 'email' });
 // Gets us nicer mongodb errors
 userSchema.plugin(mongooseError);
-
-
-
 // Creating the model as 'User' with the created userSchema
 const UserModel = mongoose.model('User', userSchema);
 

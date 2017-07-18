@@ -1,10 +1,20 @@
 const User = require('../Models/UserModel');
+const jwt = require('jwt-simple');
 const promisify = require('es6-promisify');
+
+// Function to create and send a jwt token. Used as end middleware when signing up
+// and also signing in.
+function setJwtToken(user) {
+  const timestamp = new Date().getTime();
+  return jwt.encode({ sub: user.id, iat: timestamp }, process.env.SECRET);
+}
 
 exports.getIndex = (req, res, next) => {
   res.send({ hi: 'very secret stuff here' });
 };
 
+// Various validation to validate the new user info. These methods are available since we added 
+// expressValidator to our index.js file.
 exports.validateRegistration = (req, res, next) => {
   req.sanitizeBody('name');
   req.checkBody('name', 'You must provide a name').notEmpty();
@@ -30,7 +40,6 @@ exports.validateRegistration = (req, res, next) => {
 };
 
 exports.register = async (req, res, next) => {
-
   //checking if registration email is already in the databse
   const emailExists = await User.findOne({ email: req.body.email });
   //if email exists we send an error
@@ -46,6 +55,15 @@ exports.register = async (req, res, next) => {
   // After we have promisified the User.register method we await it and the user will be saved to
   //our database
   await promisifiedRegister(user, req.body.password);
+  // the last thing is to provide the new user with a jwt, this will be used to automagically 
+  // log the user in on the client side.
+  const jwtToken = setJwtToken(user);
+  res.send({ jwtToken });
+  next();
+};
 
-  res.send({ it: 'worked' });
+exports.login = (req, res) => {
+  // after giving the user the jwt a login will happen on the client side.
+  const jwtToken = setJwtToken(req.user);
+  res.send({ jwtToken });
 };

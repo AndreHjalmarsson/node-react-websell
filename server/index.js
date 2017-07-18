@@ -23,7 +23,7 @@ const app = express();
 
 app.use(morgan('combined'));
 
-// Takes the raw requests and turns them into usable properties on req.body
+// Takes the raw requests and turns it into usable properties on req.body
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
