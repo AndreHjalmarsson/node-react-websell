@@ -34,7 +34,7 @@ app.use(expressValidator());
 app.use('/', routes);
 
 //Staring up the server
-app.set('port', process.env.PORT || 3020);
+app.set('port', process.env.PORT || 3333);
 const server = app.listen(app.get('port'), () => {
   console.log(`Server running on port -> ${server.address().port}`);
 });
