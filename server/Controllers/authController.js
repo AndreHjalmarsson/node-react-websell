@@ -63,7 +63,7 @@ exports.register = async (req, res, next) => {
 };
 
 exports.login = (req, res) => {
-  // after giving the user the jwt a login will happen on the client side.
+  // we provide the user with a jwt which will log the user in on client side.
   const jwtToken = setJwtToken(req.user);
   res.send({ jwtToken });
 };

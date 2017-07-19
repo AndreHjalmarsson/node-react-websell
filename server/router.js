@@ -5,10 +5,14 @@ const passportService = require('./services/passport');
 const authController = require('./Controllers/authController');
 
 // Passport local strategy works as login middleware.
-const loginAuth = passport.authenticate('local', { session: false });
 const router = express.Router();
+const loginAuth = passport.authenticate('local', { session: false });
+const requestAuth = passport.authenticate('jwt', { session: false });
 
-router.get('/', authController.getIndex);
+router.get('/', 
+  requestAuth,
+  authController.getIndex
+);
 
 router.post('/register', 
   authController.validateRegistration,
