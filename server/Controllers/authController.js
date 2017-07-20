@@ -25,13 +25,13 @@ exports.validateRegistration = (req, res, next) => {
     gmail_remove_subaddress: false
   });
   req.checkBody('password', 'You must provide a password').notEmpty();
-  req.checkBody('password-confirm', 'You must provide a confirmation password').notEmpty();
-  req.checkBody('password-confirm', 'Passwords do not match').equals(req.body.password);
+  req.checkBody('passwordConfirm', 'You must provide a confirmation password').notEmpty();
+  req.checkBody('passwordConfirm', 'Passwords do not match').equals(req.body.password);
 
   // If any error occured above, function below will fire off
   const errors = req.validationErrors();
   if (errors) {
-    res.send({ error: errors.map(err => err.msg) });
+    res.status(422).send({ error: errors.map(err => err.msg) });
     //sending error and returning from function
     return;
   };
@@ -44,7 +44,7 @@ exports.register = async (req, res, next) => {
   const emailExists = await User.findOne({ email: req.body.email });
   //if email exists we send an error
   if(emailExists) {
-    res.send({ error: 'Email is already in use' });
+    res.status(422).send({ error: 'Email is already in use' });
   }
   // Register the user
   const user = new User({ email: req.body.email, name: req.body.name });
@@ -57,8 +57,8 @@ exports.register = async (req, res, next) => {
   await promisifiedRegister(user, req.body.password);
   // the last thing is to provide the new user with a jwt, this will be used to automagically 
   // log the user in on the client side.
-  const jwtToken = setJwtToken(user);
-  res.send({ jwtToken });
+  const token = setJwtToken(user);
+  res.send({ token });
   next();
 };
 

@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const http = require('http');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const cors = require('cors');
 const expressValidator = require('express-validator');
 
 const routes = require('./router');
@@ -22,6 +23,8 @@ mongoose.connection.on('error', error => {
 const app = express();
 
 app.use(morgan('combined'));
+
+app.use(cors());
 
 // Takes the raw requests and turns it into usable properties on req.body
 app.use(bodyParser.json());
