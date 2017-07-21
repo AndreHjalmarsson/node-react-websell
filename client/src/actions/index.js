@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { AUTH_USER, AUTH_ERROR } from '../actions/types';
+import { AUTH_USER, AUTH_ERROR, UNAUTH_USER } from '../actions/types';
 
 const ROOT_URL = 'http://localhost:3002';
 
@@ -34,10 +34,15 @@ export function loginUser(values) {
     axios.post(`${ROOT_URL}/login`, values)
       .then(response => {
         dispatch({ type: AUTH_USER });
-        localStorage.setItem('token', reponse.data.token);
+        localStorage.setItem('token', response.data.token);
       })
-      .catch(() => {
-        dispatch(authError('Bad Login'));
-      });
+      .catch(() => dispatch(authError('Bad Login')));
+  }
+}
+
+export function logoutUser() {
+  return dispatch => {
+    dispatch({ type: UNAUTH_USER });
+    localStorage.removeItem('token');
   }
 }
