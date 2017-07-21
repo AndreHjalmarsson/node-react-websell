@@ -86,8 +86,8 @@ function validate(values) {
   }
 
   if(!values.password && !values.passwordConfirm) {
-    errors.password = "Must supply a password";
-    errors.passwordConfirm = "Must supply a confirmed password";
+    errors.password = "Must provide a password";
+    errors.passwordConfirm = "Must provide a confirmation password";
   }
 
   if(values.password !== values.passwordConfirm) {
