@@ -4,6 +4,14 @@ import { AUTH_USER, AUTH_ERROR } from '../actions/types';
 
 const ROOT_URL = 'http://localhost:3002';
 
+// helper function to handle errors and setting errors in app state
+function authError(error) {
+  return {
+    type: AUTH_ERROR,
+    payload: error
+  }
+}
+
 export function registerUser(values) {
   return function(dispatch) {
     axios.post(`${ROOT_URL}/register`, values)
@@ -20,10 +28,16 @@ export function registerUser(values) {
       .catch(error => dispatch(authError(error.response.data.error)));
   }
 }
-// helper function to handle errors and setting errors in app state
-export function authError(error) {
-  return {
-    type: AUTH_ERROR,
-    payload: error
+
+export function loginUser(values) {
+  return dispatch => {
+    axios.post(`${ROOT_URL}/login`, values)
+      .then(response => {
+        dispatch({ type: AUTH_USER });
+        localStorage.setItem('token', reponse.data.token);
+      })
+      .catch(() => {
+        dispatch(authError('Bad Login'));
+      });
   }
 }

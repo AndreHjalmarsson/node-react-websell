@@ -6,7 +6,7 @@ class Header extends Component {
 
   renderLinks() {
     const { authed } = this.props;
-    
+
     if (authed) {
       return (
         <div>
@@ -15,9 +15,14 @@ class Header extends Component {
       );
     } else {
       return (
-        <li className="nav-item">
+        <div>
+          <li className="nav-item">
           <Link to="/register" className="nav-link">Register</Link>
-        </li>
+          </li>
+          <li className="nav-item">
+            <Link to="/login" className="nav-link">Login</Link>
+          </li>
+        </div>
       );
     }
   }
