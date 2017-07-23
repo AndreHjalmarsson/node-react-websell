@@ -10,7 +10,8 @@ function setJwtToken(user) {
 }
 
 exports.getIndex = (req, res, next) => {
-  res.send({ something: 'secret' });
+  // CAN accsess req.user
+  res.send(req.user);
 };
 
 // Various validation to validate the new user info. These methods are available since we added 
