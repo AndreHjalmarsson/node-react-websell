@@ -5,6 +5,9 @@ import Register from './Register.jsx';
 import Header from './Header.jsx';
 import Login from './Login.jsx';
 import Logout from './Logout.jsx';
+import AddProduct from './AddProduct.jsx';
+import Home from './Home.jsx';
+import Hidden from './Hidden.jsx';
 
 export default class App extends Component {
   render() {
@@ -13,9 +16,12 @@ export default class App extends Component {
         <div>
           <Header />
           <Switch>
+            <Route path="/hidden" component={Hidden} />
+            <Route path="/addproduct" component={AddProduct} />
             <Route path="/login" component={Login} />
             <Route path="/logout" component={Logout} />
             <Route path="/register" component={Register} />
+            <Route path="/" component={Home} />
           </Switch>
         </div>
       </BrowserRouter>

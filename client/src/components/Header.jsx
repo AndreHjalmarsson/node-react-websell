@@ -9,9 +9,14 @@ class Header extends Component {
 
     if (authed) {
       return (
-        <li className="nav-item">
+        <div>
+          <li className="nav-item">
           <Link to="/logout" className="nav-link">Logout</Link>
-        </li>
+          </li>
+          <li className="nav-item">
+            <Link to="/addproduct" className="nav-link">Sell</Link>
+          </li>
+        </div>
       );
     } else {
       return (

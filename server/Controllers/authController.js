@@ -6,11 +6,11 @@ const promisify = require('es6-promisify');
 // and also signing in.
 function setJwtToken(user) {
   const timestamp = new Date().getTime();
-  return jwt.encode({ sub: user.id, iat: timestamp }, process.env.SECRET);
+  return jwt.encode({ sub: user._id, iat: timestamp }, process.env.SECRET);
 }
 
 exports.getIndex = (req, res, next) => {
-  res.send({ hi: 'very secret stuff here' });
+  res.send({ something: 'secret' });
 };
 
 // Various validation to validate the new user info. These methods are available since we added 
@@ -55,15 +55,15 @@ exports.register = async (req, res, next) => {
   // After we have promisified the User.register method we await it and the user will be saved to
   //our database
   await promisifiedRegister(user, req.body.password);
-  // the last thing is to provide the new user with a jwt, this will be used to automagically 
-  // log the user in on the client side.
+  // the last thing is to provide the new user with a jwt.
   const token = setJwtToken(user);
   res.send({ token });
   next();
 };
 
 exports.login = (req, res) => {
-  // we provide the user with a jwt which will log the user in on client side.
+  // we provide the user with a jwt.
   const token = setJwtToken(req.user);
   res.send({ token });
+  
 };

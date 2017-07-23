@@ -3,6 +3,7 @@ const passport = require('passport');
 const passportService = require('./services/passport');
 
 const authController = require('./Controllers/authController');
+const productController = require('./Controllers/productController');
 
 // Passport local strategy works as login middleware.
 const router = express.Router();
@@ -23,6 +24,8 @@ router.post('/login',
   loginAuth,
   authController.login
 );
+
+router.post('/addproduct', productController.addProduct);
 
 
 module.exports = router;

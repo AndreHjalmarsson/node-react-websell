@@ -3,7 +3,7 @@ import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
-class Register extends Component {
+class AddProduct extends Component {
 
  renderField(field){
     const { label, type, input, meta: { touched, error } } = field;
@@ -23,12 +23,6 @@ class Register extends Component {
     );
   }
 
-  handleRegisterForm(values){
-    this.props.registerUser(values, () => {
-      this.props.history.push('/');
-    });
-  }
-
   renderAlert() {
     const { errorMessage } = this.props;
     if (errorMessage) {
@@ -40,37 +34,47 @@ class Register extends Component {
     }
   }
 
+  handleProductForm(values) {
+    this.props.addProduct(values);
+  }
+
   render() {
     const { handleSubmit } = this.props;
 
     return(
-      <form onSubmit={ handleSubmit(this.handleRegisterForm.bind(this)) }>
+      <form onSubmit={handleSubmit(this.handleProductForm.bind(this))} >
         <Field
-          label="Name:"
-          name="name"
+          label="Title:"
+          name="title"
           type="text"
           component={this.renderField}
         />
         <Field
-          label="Email:"
-          name="email"
+          label="Description:"
+          name="description"
           type="text"
           component={this.renderField}
         />
         <Field
-          label="Password:"
-          name="password"
+          label="Type:"
+          name="type"
           type="password"
           component={this.renderField}
         />
         <Field
-          label="Confirm password:"
-          name="passwordConfirm"
-          type="password"
+          label="Price:"
+          name="price"
+          type="number"
+          component={this.renderField}
+        />
+        <Field
+          label="Photo:"
+          name="photo"
+          type="text"
           component={this.renderField}
         />
         {this.renderAlert()}
-        <button type="submit" className="btn btn-primary">Sign Up</button>
+        <button type="submit" className="btn btn-primary">Add product</button>
       </form>
     );
   }
@@ -78,24 +82,6 @@ class Register extends Component {
 
 function validate(values) {
   const errors = {};
-
-  if(!values.name) {
-    errors.name = 'Must provide a name';
-  }
-
-  if(!values.email) {
-    errors.email = 'Must provide an email';
-  }
-
-  if(!values.password && !values.passwordConfirm) {
-    errors.password = "Must provide a password";
-    errors.passwordConfirm = "Must provide a confirmation password";
-  }
-
-  if(values.password !== values.passwordConfirm) {
-    errors.passwordConfirm = "Passwords do not match!";
-  }
-
   return errors;
 }
 
@@ -107,7 +93,7 @@ function mapStateToProps(state) {
 
 export default reduxForm({
   validate,
-  form: 'registerForm'
+  form: 'productForm'
 })(
-  connect(mapStateToProps, actions)(Register)
+  connect(mapStateToProps, actions)(AddProduct)
 );
