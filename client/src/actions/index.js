@@ -44,7 +44,9 @@ export function loginUser(values, callback) {
 
 export function addProduct(values) {
   return dispatch => {
-    axios.post(`${ROOT_URL}/addproduct`, values)
+    axios.post(`${ROOT_URL}/addproduct`, values, {
+      headers: { authorization: localStorage.getItem('token') }
+    })
       .then(response => {
         dispatch({ type: ADD_PRODUCT, payload: response.data.message });
       })

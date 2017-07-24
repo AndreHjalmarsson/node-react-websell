@@ -4,7 +4,6 @@ const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 require('dotenv').config({ path: 'variables.env' });
 
-
 const User = require('../Models/UserModel');
 
 // Creating a passport local strategy. createStrategy is available because we used

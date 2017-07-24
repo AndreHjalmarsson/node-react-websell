@@ -6,7 +6,7 @@ const productSchema = new mongoose.Schema({
   type: String,
   price: Number,
   created: { type: Date, default: Date.now },
-  // author: { type: mongoose.Schema.ObjectId, ref: 'User', required: 'Must provide a seller' },
+  author: { type: mongoose.Schema.ObjectId, ref: 'User', required: 'Must provide a seller' },
   photo: String
 });
 
