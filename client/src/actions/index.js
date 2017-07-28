@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { AUTH_USER, AUTH_ERROR, UNAUTH_USER, ADD_PRODUCT, GET_MESSAGE } from '../actions/types';
+import { AUTH_USER, AUTH_ERROR, UNAUTH_USER, ADD_PRODUCT, GET_MESSAGE, GET_PRODUCTS, GET_PRODUCT } from '../actions/types';
 
 const ROOT_URL = 'http://localhost:3002';
 
@@ -61,13 +61,22 @@ export function logoutUser() {
   }
 }
 
-export function getIndex() {
+export function getProducts() {
   return dispatch => {
-    axios.get(`${ROOT_URL}`, {
-      headers: { authorization: localStorage.getItem('token') }
-    })
-    .then(response => {
-      dispatch({ type: GET_MESSAGE, payload: response.data });
-    })
+    axios.get(`${ROOT_URL}/getproducts`)
+      .then(response => {
+        dispatch({ type: GET_PRODUCTS, payload: response.data })
+      })
+      .catch(() => dispatch(authError('no products found')));
+  }
+}
+
+export function getProduct(id) {
+  return dispatch => {
+    axios.get(`${ROOT_URL}/getproduct/${id}`)
+      .then(response => {
+        dispatch({ type: GET_PRODUCT, payload: response.data })
+      })
+      .catch(() => dispatch(authError('No product found')));
   }
 }

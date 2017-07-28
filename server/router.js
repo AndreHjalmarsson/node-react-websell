@@ -25,7 +25,14 @@ router.post('/login',
   authController.login
 );
 
-router.post('/addproduct', requestAuth, productController.addProduct);
+router.post('/addproduct', 
+  requestAuth, 
+  productController.addProduct
+);
+
+router.get('/getproducts', productController.getProducts);
+
+router.get('/getproduct/:id', productController.getProduct);
 
 
 module.exports = router;

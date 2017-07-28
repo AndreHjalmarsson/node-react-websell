@@ -58,7 +58,7 @@ class AddProduct extends Component {
         <Field
           label="Type:"
           name="type"
-          type="password"
+          type="text"
           component={this.renderField}
         />
         <Field
