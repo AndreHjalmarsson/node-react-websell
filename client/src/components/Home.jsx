@@ -12,11 +12,11 @@ class Home extends Component {
 
   productCard() {
     return this.props.products.map(product => {
-    const { _id, title, description, type, price, photo, author, created } = product;
+    const { _id, title, description, type, price, photo, seller, created } = product;
       return (
         <div key={_id}>
           <ProductCard key={_id} id={_id} title={title} description={description}
-          type={type} price={price} photo={photo} author={author} created={created} 
+          type={type} price={price} photo={photo} seller={seller} created={created} 
           />  
         </div>
       );
