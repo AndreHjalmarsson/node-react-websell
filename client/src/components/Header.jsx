@@ -10,6 +10,7 @@ class Header extends Component {
     if (authed) {
       return (
         <div>
+          {this.props.children}
           <li className="nav-item pull-xs-right">
           <Link to="/logout" className="nav-link">Logout</Link>
           </li>

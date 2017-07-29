@@ -9,7 +9,6 @@ class ShowProduct extends Component {
   }
 
   render() {
-    console.log(this.props.product);
     return(
       <div>
         Single product

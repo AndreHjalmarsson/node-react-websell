@@ -9,12 +9,20 @@ import AddProduct from './AddProduct.jsx';
 import Home from './Home.jsx';
 import ShowProduct from './ShowProduct.jsx';
 
+import styled from 'styled-components';
+
+const HeaderStyle = styled.div`
+  background-color: grey;
+`
+
 export default class App extends Component {
   render() {
     return (
       <BrowserRouter> 
         <div>
-          <Header />
+          <HeaderStyle> 
+            <Header />
+          </HeaderStyle>
           <Switch>
             <Route path="/product/:id" component={ShowProduct} />
             <Route path="/addproduct" component={AddProduct} />

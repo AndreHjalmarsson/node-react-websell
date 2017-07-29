@@ -14,6 +14,6 @@ exports.getProducts = async (req, res) => {
 exports.getProduct = async (req, res) => {
   // When fetching a product we populate the seller property, this will make all the Usermodel properties 
   // available on the seller object.
-  const product = await Product.findOne({ _id: req.params.id }).populate({ path: 'seller' })
+  const product = await Product.findOne({ _id: req.params.id });
   res.send(product);
 }
