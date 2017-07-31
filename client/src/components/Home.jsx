@@ -14,7 +14,7 @@ class Home extends Component {
     return this.props.products.map(product => {
     const { _id, title, description, type, price, photo, seller, created } = product;
       return (
-        <div key={_id} className="col-md-4" >
+        <div key={_id} className="col-md-4">
           <ProductCard key={_id} id={_id} title={title} description={description}
           type={type} price={price} photo={photo} seller={seller} created={created} 
           />
@@ -27,7 +27,9 @@ class Home extends Component {
     return (
       <div>
         Home
-        {this.props.products ? this.productCard() : null}
+        <div className="row">
+          {this.props.products ? this.productCard() : null}
+        </div>
       </div>
     );
   }
