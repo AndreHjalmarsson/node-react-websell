@@ -5,6 +5,11 @@ import Dropzone from 'react-dropzone';
 import * as actions from '../actions';
 
 class AddProduct extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = { files: [] }
+  }
 
  renderField(field){
     const { label, type, input, meta: { touched, error } } = field;
@@ -26,12 +31,19 @@ class AddProduct extends Component {
 
   renderDropField(field) {
 		return <div>
-      {/* Dropzone will create an array of files with various props on and send as value to the backend,
+				{/* Dropzone will create an array of files with various props on and send as value to the backend,
       to avoid this we select only the first item in the array and pull out the name prop, this
-      will simply put the photo name as a string and put on values.photo to the backend */}
-				<Dropzone name={field.name} onDrop={(filesToUpload, e) => field.input.onChange(filesToUpload)}>
+      will simply put the photo name as a string and put on values.photo to the backend we also put
+      the uploaded files to our comp state in order to show a preview of the added photo before submiting */}
+				<Dropzone name={field.name} onDrop={(filesToUpload, e) => {
+          this.setState({ files: filesToUpload });
+          return field.input.onChange(filesToUpload[0].name);
+          }}>
 					<div>
-						Add an image
+            {/* If a file is uploaded show the preview  */}
+						{field.input.value ? 
+            <img width="195" height="195" src={this.state.files.map(file => file.preview)} alt="" /> :
+             'Add an image'}
 					</div>
 				</Dropzone>
 			</div>;
@@ -61,7 +73,7 @@ class AddProduct extends Component {
 				<Field label="Description:" name="description" type="text" component={this.renderField} />
 				<Field label="Type:" name="type" type="text" component={this.renderField} />
 				<Field label="Price:" name="price" type="number" component={this.renderField} />
-				<Field label="Photo:" name="photo" component={this.renderDropField} />
+				<Field label="Photo:" name="photo" component={this.renderDropField.bind(this)} />
 				{this.renderAlert()}
 				<button type="submit" className="btn btn-primary">
 					Add product

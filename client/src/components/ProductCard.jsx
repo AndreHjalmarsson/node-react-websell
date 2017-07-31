@@ -4,25 +4,31 @@ import styled from 'styled-components';
 import ReactCardFlip from 'react-card-flip';
 
 const CardWrapper = styled.div`
-  margin-bottom: 250px !important;
+  margin-bottom: 320px !important;
   cursor: pointer;
+`;
+
+const Img = styled.img`
+  max-width: 100%;
+  max-height: 100%;
 `;
 
 const ImgWrapper = styled.div`
 	background-color: red;
-	width: 100%;
+  width: 100%;
+  height: 50%;
 	border-radius: 7px 7px 0px 0px;
 `;
 
 const Front = styled.div`
 	background-color: #ededed;
-	height: 200px;
+	height: 300px;
 	border-radius: 7px;
 `;
 
 const Back = styled.div`
 	background-color: #ededed;
-	height: 200px;
+	height: 300px;
 	border-radius: 7px;
 `;
 
@@ -44,8 +50,7 @@ class ProductCard extends Component {
 				<ReactCardFlip isFlipped={this.state.isFlipped}>
 					<Front key="front">
 						<ImgWrapper>
-							<img src={this.props.photo[0].preview} alt="" />
-							{this.props.photo[0].preview}
+							<Img src={this.props.photo.preview} alt="" />
 						</ImgWrapper>
 					</Front>
 					<Back key="back">
