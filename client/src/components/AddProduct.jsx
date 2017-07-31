@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
+import Dropzone from 'react-dropzone';
 import * as actions from '../actions';
 
 class AddProduct extends Component {
@@ -23,6 +24,19 @@ class AddProduct extends Component {
     );
   }
 
+  renderDropField(field) {
+		return <div>
+      {/* Dropzone will create an array of files with various props on and send as value to the backend,
+      to avoid this we select only the first item in the array and pull out the name prop, this
+      will simply put the photo name as a string and put on values.photo to the backend */}
+				<Dropzone name={field.name} onDrop={(filesToUpload, e) => field.input.onChange(filesToUpload)}>
+					<div>
+						Add an image
+					</div>
+				</Dropzone>
+			</div>;
+  }
+
   renderAlert() {
     const { errorMessage } = this.props;
     if (errorMessage) {
@@ -35,48 +49,24 @@ class AddProduct extends Component {
   }
 
   handleProductForm(values) {
+    console.log(values);
     this.props.addProduct(values);
   }
 
   render() {
     const { handleSubmit } = this.props;
 
-    return(
-      <form onSubmit={handleSubmit(this.handleProductForm.bind(this))} >
-        <Field
-          label="Title:"
-          name="title"
-          type="text"
-          component={this.renderField}
-        />
-        <Field
-          label="Description:"
-          name="description"
-          type="text"
-          component={this.renderField}
-        />
-        <Field
-          label="Type:"
-          name="type"
-          type="text"
-          component={this.renderField}
-        />
-        <Field
-          label="Price:"
-          name="price"
-          type="number"
-          component={this.renderField}
-        />
-        <Field
-          label="Photo:"
-          name="photo"
-          type="text"
-          component={this.renderField}
-        />
-        {this.renderAlert()}
-        <button type="submit" className="btn btn-primary">Add product</button>
-      </form>
-    );
+    return <form onSubmit={handleSubmit(this.handleProductForm.bind(this))} encType="multipart/form-data">
+				<Field label="Title:" name="title" type="text" component={this.renderField} />
+				<Field label="Description:" name="description" type="text" component={this.renderField} />
+				<Field label="Type:" name="type" type="text" component={this.renderField} />
+				<Field label="Price:" name="price" type="number" component={this.renderField} />
+				<Field label="Photo:" name="photo" component={this.renderDropField} />
+				{this.renderAlert()}
+				<button type="submit" className="btn btn-primary">
+					Add product
+				</button>
+			</form>;
   }
 }
 

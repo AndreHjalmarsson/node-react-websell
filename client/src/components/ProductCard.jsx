@@ -44,19 +44,18 @@ class ProductCard extends Component {
 				<ReactCardFlip isFlipped={this.state.isFlipped}>
 					<Front key="front">
 						<ImgWrapper>
-							{this.props.photo}
+							<img src={this.props.photo[0].preview} alt="" />
+							{this.props.photo[0].preview}
 						</ImgWrapper>
 					</Front>
-					<Back key="back">This is the back of the card.</Back>
+					<Back key="back">
+						<p>Back</p>
+						<p>Back</p>
+						<p>Back</p>
+					</Back>
 				</ReactCardFlip>
 			</CardWrapper>;
   }
 };
 
 export default ProductCard;
-    //  <CardWrapper>
-    //     <ImgWrapper> 
-    //       {this.props.photo}
-    //     </ImgWrapper>
-    //    {this.props.title}
-    //  </CardWrapper>
