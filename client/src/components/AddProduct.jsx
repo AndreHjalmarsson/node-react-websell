@@ -30,10 +30,11 @@ class AddProduct extends Component {
   }
 
   renderDropField(field) {
-		return <div>
-				{/* Dropzone will create an array of files with various props on and send as value to the backend,
-      to avoid this we select only the first item in the array we also put
-      the uploaded files to our comp state in order to show a preview of the added photo before submiting */}
+		return (
+     <div>
+        {/* Dropzone will create an array of files with various props on and send as value to the backend,
+        to avoid this we select only the first item in the array we also put
+        the uploaded files to our comp state in order to show a preview of the added photo before submiting */}
 				<Dropzone name={field.name} onDrop={(filesToUpload, e) => {
           this.setState({ files: filesToUpload });
           return field.input.onChange(filesToUpload[0]); 
@@ -45,7 +46,8 @@ class AddProduct extends Component {
              'Add an image'}
 					</div>
 				</Dropzone>
-			</div>;
+			</div>
+    );
   }
 
   renderAlert() {
@@ -74,7 +76,8 @@ class AddProduct extends Component {
   render() {
     const { handleSubmit } = this.props;
 
-    return <form onSubmit={handleSubmit(this.handleProductForm.bind(this))} encType="multipart/form-data">
+    return (
+     <form onSubmit={handleSubmit(this.handleProductForm.bind(this))} encType="multipart/form-data">
 				<Field label="Title:" name="title" type="text" component={this.renderField} />
 				<Field label="Description:" name="description" type="text" component={this.renderField} />
 				<Field label="Type:" name="type" type="text" component={this.renderField} />
@@ -84,7 +87,8 @@ class AddProduct extends Component {
 				<button type="submit" className="btn btn-primary">
 					Add product
 				</button>
-			</form>;
+	  	</form>
+    );
   }
 }
 
