@@ -20,6 +20,7 @@
     "express": "^4.13.4",
     "express-session": "^1.15.4",
     "express-validator": "^3.2.1",
+    "fs": "0.0.1-security",
     "jwt-simple": "^0.5.1",
     "mongoose": "^4.4.7",
     "mongoose-mongodb-errors": "0.0.2",

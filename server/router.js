@@ -26,7 +26,8 @@ router.post('/login',
 );
 
 router.post('/addproduct', 
-  requestAuth, 
+  requestAuth,
+  productController.storeImage,
   productController.addProduct
 );
 

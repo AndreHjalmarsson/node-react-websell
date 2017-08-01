@@ -32,12 +32,11 @@ class AddProduct extends Component {
   renderDropField(field) {
 		return <div>
 				{/* Dropzone will create an array of files with various props on and send as value to the backend,
-      to avoid this we select only the first item in the array and pull out the name prop, this
-      will simply put the photo name as a string and put on values.photo to the backend we also put
+      to avoid this we select only the first item in the array we also put
       the uploaded files to our comp state in order to show a preview of the added photo before submiting */}
 				<Dropzone name={field.name} onDrop={(filesToUpload, e) => {
           this.setState({ files: filesToUpload });
-          return field.input.onChange(filesToUpload[0].name);
+          return field.input.onChange(filesToUpload[0]); 
           }}>
 					<div>
             {/* If a file is uploaded show the preview  */}
@@ -61,7 +60,14 @@ class AddProduct extends Component {
   }
 
   handleProductForm(values) {
-    console.log(values);
+    console.log(values.photo);
+    // File {preview: "blob:http://localhost:8002/15be367f-e0ce-469a-a970-b4a7ad84ef47", 
+    // name: "13.jpeg", 
+    // lastModified: 1496566125805, 
+    // lastModifiedDate: Sun Jun 04 2017 10:48:45 GMT+0200 (Västeuropa, sommartid), 
+    // size: 211739;
+		// type: 'image/jpeg';
+    // webkitRelativePath: ""…}
     this.props.addProduct(values);
   }
 
@@ -73,7 +79,7 @@ class AddProduct extends Component {
 				<Field label="Description:" name="description" type="text" component={this.renderField} />
 				<Field label="Type:" name="type" type="text" component={this.renderField} />
 				<Field label="Price:" name="price" type="number" component={this.renderField} />
-				<Field label="Photo:" name="photo" component={this.renderDropField.bind(this)} />
+				<Field label="Photo:" name="photo" type="file" component={this.renderDropField.bind(this)} />
 				{this.renderAlert()}
 				<button type="submit" className="btn btn-primary">
 					Add product
