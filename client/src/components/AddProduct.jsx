@@ -62,14 +62,6 @@ class AddProduct extends Component {
   }
 
   handleProductForm(values) {
-    console.log(values.photo);
-    // File {preview: "blob:http://localhost:8002/15be367f-e0ce-469a-a970-b4a7ad84ef47", 
-    // name: "13.jpeg", 
-    // lastModified: 1496566125805, 
-    // lastModifiedDate: Sun Jun 04 2017 10:48:45 GMT+0200 (Västeuropa, sommartid), 
-    // size: 211739;
-		// type: 'image/jpeg';
-    // webkitRelativePath: ""…}
     this.props.addProduct(values);
   }
 

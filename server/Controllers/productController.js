@@ -1,9 +1,18 @@
 const Product = require('../Models/ProductModel');
-const fs = require('fs');
+const multer = require('multer');
+
+const multerOptions = {
+	storage: multer.memoryStorage(),
+	fileFilter(req, file, next) {
+		const isPhoto = file.mimetype.startsWith('image/');
+		isPhoto ? next(null, true) : next({ message: "Filetype not allowed" }, false);
+	}
+};
+
+exports.upload = multer(multerOptions).any();
 
 exports.storeImage = async (req, res, next) => {
-  console.log(req.body.photo);
-  // { preview: 'blob:http://localhost:8002/a5ecfc5-2405-4b58-953f-ff8e4c4815fb'}
+  console.log(req.file);
   next();
 }
 

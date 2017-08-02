@@ -44,14 +44,19 @@ export function loginUser(values, callback) {
 
 export function addProduct(values) {
   return dispatch => {
-    axios.post(`${ROOT_URL}/addproduct`, values, {
-      headers: { authorization: localStorage.getItem('token') }
-    })
-      .then(response => {
-        dispatch({ type: ADD_PRODUCT, payload: response.data.message });
-      })
-      .catch(() => dispatch(authError('Could not add product to store')));
-  }
+		let data = new FormData();
+		Object.keys(values).forEach(key => {
+			data.append(key, values[key]);
+		});
+		axios
+			.post(`${ROOT_URL}/addproduct`, data, {
+				headers: { authorization: localStorage.getItem('token') }
+			})
+			.then(response => {
+				dispatch({ type: ADD_PRODUCT, payload: response.data.message });
+			})
+			.catch(() => dispatch(authError('Could not add product to store')));
+	};
 }
 
 export function logoutUser() {
