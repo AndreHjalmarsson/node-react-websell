@@ -7,7 +7,7 @@ const productSchema = new mongoose.Schema({
   price: Number,
   created: { type: Date, default: Date.now },
   seller: { type: mongoose.Schema.ObjectId, ref: 'User', required: 'Must provide a seller' },
-  photo: Array
+  photo: String
 });
 
 // A function to populate the seller field with all the fields that it refenrences, in this case being the UserModel

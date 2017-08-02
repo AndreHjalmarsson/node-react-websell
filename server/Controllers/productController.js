@@ -1,5 +1,7 @@
 const Product = require('../Models/ProductModel');
 const multer = require('multer');
+const jimp = require('jimp');
+const uuid = require('uuid');
 
 const multerOptions = {
 	storage: multer.memoryStorage(),
@@ -9,12 +11,22 @@ const multerOptions = {
 	}
 };
 
-exports.upload = multer(multerOptions).any();
+exports.upload = multer(multerOptions).single('photo');
 
 exports.storeImage = async (req, res, next) => {
-  console.log(req.file);
-  next();
-}
+	if (!req.file) {
+		next(); // skip to the next middleware
+		return;
+	}
+	const extension = req.file.mimetype.split('/')[1];
+	req.body.photo = `${uuid.v4()}.${extension}`;
+	// now we resize
+	const photo = await jimp.read(req.file.buffer);
+	await photo.resize(800, jimp.AUTO);
+	await photo.write(`./uploads/${req.body.photo}`);
+	// once we have written the photo to our filesystem, keep going!
+	next();
+};
 
 exports.addProduct = async (req, res) => {
   req.body.seller = req.user.id;
