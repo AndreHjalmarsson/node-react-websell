@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const passport = require('passport');
 const cors = require('cors');
+const path = require('path');
 const expressValidator = require('express-validator');
 
 const routes = require('./router');
@@ -26,6 +27,8 @@ app.use(morgan('combined'));
 
 // Opens the server up for different domains
 app.use(cors());
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Takes the raw requests and turns it into usable properties on req.body
 app.use(bodyParser.json());

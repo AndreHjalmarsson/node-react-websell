@@ -46,12 +46,11 @@ class ProductCard extends Component {
   }
  
   render() {
-    console.log(this.props.photo);
     return <CardWrapper onClick={this.handleClick}>
 				<ReactCardFlip isFlipped={this.state.isFlipped}>
 					<Front key="front">
 						<ImgWrapper>
-							<Img src={`../../../server/uploads/${this.props.photo}`} alt="" />
+							 <Img src={`http://localhost:3002/uploads/${this.props.photo}`} alt={this.props.photo} />
 						</ImgWrapper>
 					</Front>
 					<Back key="back">
