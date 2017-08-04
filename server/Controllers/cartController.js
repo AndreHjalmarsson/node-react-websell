@@ -8,5 +8,5 @@ exports.addToCart = async (req, res) => {
     },
     { new: true }
   );
-  res.send(user.cart);
+  res.send({ message: 'Added product to cart' });
 }

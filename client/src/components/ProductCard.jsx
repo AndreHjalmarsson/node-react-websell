@@ -57,7 +57,6 @@ class ProductCard extends Component {
   }
  
   render() {
-    console.log(this.props.isInCart);
     return <CardWrapper onClick={this.handleClick}>
 				<ReactCardFlip isFlipped={this.state.isFlipped}>
 					<Front key="front">
@@ -83,6 +82,7 @@ class ProductCard extends Component {
 
 function mapStateToProps(state) {
   return {
+    message: state.cart.message,
     isInCart: state.cart.isInCart
   }
 }

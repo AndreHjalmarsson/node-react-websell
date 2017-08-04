@@ -95,11 +95,17 @@ export function getProduct(id) {
   }
 }
 
-export function addToCart(id) {
+export function addToCart(productId) {
   return dispatch => {
-    axios.post(`${ROOT_URL}/addtocart/${id}`, null, {
+    axios.post(`${ROOT_URL}/addtocart/${productId}`, null, {
       headers: { authorization: localStorage.getItem('token') }
     })
     .then(response => dispatch({ type: CART_ADD, payload: response.data }))
+  }
+}
+
+export function fetchCart(userId) {
+  return dispatch => {
+    axios.get(`${ROOT_URL}/getcart`)
   }
 }
