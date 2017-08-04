@@ -57,6 +57,7 @@ class ProductCard extends Component {
   }
  
   render() {
+    console.log(this.props.isInCart);
     return <CardWrapper onClick={this.handleClick}>
 				<ReactCardFlip isFlipped={this.state.isFlipped}>
 					<Front key="front">
@@ -65,7 +66,9 @@ class ProductCard extends Component {
 						</ImgWrapper> 
             <Link to={`/product/${this.props.id}`}>{this.props.title}</Link>
             <form onSubmit={this.handleSubmit}>
-              <button type="submit" className="btn btn-primary pull-xs-right push-xs-down">Buy</button>
+              <button type="submit" className="btn btn-primary pull-xs-right push-xs-down">
+                { this.props.id !== this.props.isInCart ?  'Buy' : 'Remove' }
+              </button>
             </form>
 					</Front>
 					<Back key="back">
