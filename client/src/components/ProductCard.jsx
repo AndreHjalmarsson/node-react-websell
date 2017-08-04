@@ -53,7 +53,6 @@ class ProductCard extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(this.props.id);
     this.props.addToCart(this.props.id);
   }
  
@@ -79,4 +78,10 @@ class ProductCard extends Component {
   }
 };
 
-export default connect(null, actions)(ProductCard);
+function mapStateToProps(state) {
+  return {
+    isInCart: state.cart.isInCart
+  }
+}
+
+export default connect(mapStateToProps, actions)(ProductCard);

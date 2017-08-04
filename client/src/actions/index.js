@@ -1,6 +1,15 @@
 import axios from 'axios';
 
-import { AUTH_USER, AUTH_ERROR, UNAUTH_USER, ADD_PRODUCT, GET_MESSAGE, GET_PRODUCTS, GET_PRODUCT } from '../actions/types';
+import { 
+  AUTH_USER, 
+  AUTH_ERROR, 
+  UNAUTH_USER, 
+  ADD_PRODUCT, 
+  GET_MESSAGE, 
+  GET_PRODUCTS, 
+  GET_PRODUCT, 
+  CART_ADD 
+} from '../actions/types';
 
 export const ROOT_URL = 'http://localhost:3002';
 
@@ -90,6 +99,7 @@ export function addToCart(id) {
   return dispatch => {
     axios.post(`${ROOT_URL}/addtocart/${id}`, null, {
       headers: { authorization: localStorage.getItem('token') }
-    });
+    })
+    .then(response => dispatch({ type: CART_ADD, payload: response.data }))
   }
 }

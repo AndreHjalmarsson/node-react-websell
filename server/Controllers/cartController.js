@@ -9,5 +9,5 @@ exports.addToCart = async (req, res) => {
     },
     { new: true }
   );
-  res.send('Product added to Shopping bag');
+  res.send({ id: req.params.id });
 }

@@ -5,3 +5,4 @@ export const ADD_PRODUCT = 'add_product';
 export const GET_MESSAGE = 'get_message';
 export const GET_PRODUCTS = 'get_products';
 export const GET_PRODUCT = 'get_product';
+export const CART_ADD = 'cart_add';
