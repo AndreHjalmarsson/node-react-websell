@@ -25,7 +25,7 @@ class Login extends Component {
 
   handleLoginForm(values) {
     this.props.loginUser(values, () => {
-      this.props.history.push('/hidden');
+      this.props.history.push('/');
     });
   }
 

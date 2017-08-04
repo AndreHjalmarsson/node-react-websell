@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import ReactCardFlip from 'react-card-flip';
+import { connect } from 'react-redux';
+import * as actions from '../actions';
+
+import { ROOT_URL } from '../actions/index.js';
 
 const CardWrapper = styled.div`
   margin-bottom: 320px !important;
@@ -9,14 +13,15 @@ const CardWrapper = styled.div`
 `;
 
 const Img = styled.img`
-  max-width: 100%;
-  max-height: 100%;
+	max-width: 100%;
+	max-height: 100%;
+	border-radius: 7px 0px 0px 0px;
 `;
 
 const ImgWrapper = styled.div`
-	background-color: red;
-  width: 100%;
-  height: 50%;
+	background-color: #ededed;
+	width: 100%;
+	height: 50%;
 	border-radius: 7px 7px 0px 0px;
 `;
 
@@ -39,10 +44,17 @@ class ProductCard extends Component {
 
     this.state = { isFlipped: false };
     this.handleClick = this.handleClick.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
  
   handleClick() {
     this.setState(() => !this.state.isFlipped ? { isFlipped: true } : { isFlipped: false });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    console.log(this.props.id);
+    this.props.addToCart(this.props.id);
   }
  
   render() {
@@ -50,8 +62,12 @@ class ProductCard extends Component {
 				<ReactCardFlip isFlipped={this.state.isFlipped}>
 					<Front key="front">
 						<ImgWrapper>
-							 <Img src={`http://localhost:3002/uploads/${this.props.photo}`} alt={this.props.photo} />
-						</ImgWrapper>
+							 <Img src={`${ROOT_URL}/uploads/${this.props.photo}`} alt={this.props.photo} />
+						</ImgWrapper> 
+            <Link to={`/product/${this.props.id}`}>{this.props.title}</Link>
+            <form onSubmit={this.handleSubmit}>
+              <button type="submit" className="btn btn-primary pull-xs-right push-xs-down">Buy</button>
+            </form>
 					</Front>
 					<Back key="back">
 						<p>Back</p>
@@ -63,4 +79,4 @@ class ProductCard extends Component {
   }
 };
 
-export default ProductCard;
+export default connect(null, actions)(ProductCard);

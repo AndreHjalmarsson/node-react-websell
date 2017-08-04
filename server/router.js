@@ -4,6 +4,7 @@ const passportService = require('./services/passport');
 
 const authController = require('./Controllers/authController');
 const productController = require('./Controllers/productController');
+const cartController = require('./Controllers/cartController');
 
 // Passport local strategy works as login middleware.
 const router = express.Router();
@@ -35,6 +36,11 @@ router.post('/addproduct',
 router.get('/getproducts', productController.getProducts);
 
 router.get('/getproduct/:id', productController.getProduct);
+
+router.post('/addtocart/:id',
+  requestAuth,
+  cartController.addToCart
+);
 
 
 module.exports = router;

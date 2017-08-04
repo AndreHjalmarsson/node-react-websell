@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import { AUTH_USER, AUTH_ERROR, UNAUTH_USER, ADD_PRODUCT, GET_MESSAGE, GET_PRODUCTS, GET_PRODUCT } from '../actions/types';
 
-const ROOT_URL = 'http://localhost:3002';
+export const ROOT_URL = 'http://localhost:3002';
 
 // helper function to handle errors and setting errors in app state
 function authError(error) {
@@ -83,5 +83,13 @@ export function getProduct(id) {
         dispatch({ type: GET_PRODUCT, payload: response.data })
       })
       .catch(() => dispatch(authError('No product found')));
+  }
+}
+
+export function addToCart(id) {
+  return dispatch => {
+    axios.post(`${ROOT_URL}/addtocart/${id}`, null, {
+      headers: { authorization: localStorage.getItem('token') }
+    });
   }
 }

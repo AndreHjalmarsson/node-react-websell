@@ -16,7 +16,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: 'Must provide a name',
     trim: true
-   }
+   },
+  cart: [
+    { type: mongoose.Schema.ObjectId, ref: 'Product' }
+  ]
 });
 
 // Adding plugins to manage user's password field and adding useful methods on 
