@@ -46,6 +46,10 @@ class ProductCard extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  componentDidMount() {
+    this.props.fetchCart();
+  }
  
   handleClick() {
     this.setState(() => !this.state.isFlipped ? { isFlipped: true } : { isFlipped: false });
