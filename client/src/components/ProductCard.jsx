@@ -61,6 +61,7 @@ class ProductCard extends Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.addToCart(this.props.id);
+    this.props.fetchCart();
   }
 
   renderButtonText() {
@@ -77,11 +78,9 @@ class ProductCard extends Component {
               </ImgWrapper> 
               <Link to={`/product/${this.props.id}`}>{this.props.title}</Link>
             </UpperFront>
-            <form onSubmit={this.handleSubmit}>
-              <button type="submit" className="btn btn-primary pull-xs-right">
-                 { this.props.productsInCart && this.renderButtonText()}
-              </button>
-            </form>
+            <button onClick={this.handleSubmit} className="btn btn-primary pull-xs-right">
+              { this.props.productsInCart && this.renderButtonText()}
+            </button>
 					</Front>
           <Back key="back" onClick={this.handleClick}>
 						<p>Back</p>
@@ -95,7 +94,8 @@ class ProductCard extends Component {
 
 function mapStateToProps(state) {
   return {
-    message: state.cart.message
+    message: state.cart.message,
+    productsInCart: state.cart.productsInCart
   }
 }
 
