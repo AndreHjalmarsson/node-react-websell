@@ -18,6 +18,7 @@ class Home extends Component {
         <div key={_id} className="col-md-4">
           <ProductCard key={_id} id={_id} title={title} description={description}
           type={type} price={price} photo={photo} seller={seller} created={created} 
+          productsInCart={this.props.productsInCart}
           />
         </div>
       );
@@ -25,7 +26,7 @@ class Home extends Component {
   }
 
   render() {
-    console.log(this.props.isInCart);
+    console.log(this.props.productsInCart);
     return (
       <div>
         Home
@@ -40,7 +41,7 @@ class Home extends Component {
 function mapStateToProps(state) {
   return {
     products: state.product.allProducts,
-    isInCart: state.cart.isInCart
+    productsInCart: state.cart.productsInCart
   }
 }
 

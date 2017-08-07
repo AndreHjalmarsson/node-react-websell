@@ -46,10 +46,6 @@ class ProductCard extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
-  componentDidUpdate() {
-    this.props.fetchCart();
-  }
  
   handleClick() {
     this.setState(() => !this.state.isFlipped ? { isFlipped: true } : { isFlipped: false });
@@ -58,6 +54,10 @@ class ProductCard extends Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.addToCart(this.props.id);
+  }
+
+  renderButtonText() {
+    return this.props.productsInCart.includes(this.props.id) ? 'Remove' : 'Buy';
   }
  
   render() {
@@ -70,7 +70,7 @@ class ProductCard extends Component {
             <Link to={`/product/${this.props.id}`}>{this.props.title}</Link>
             <form onSubmit={this.handleSubmit}>
               <button type="submit" className="btn btn-primary pull-xs-right push-xs-down">
-                { this.props.id !== this.props.isInCart ?  'Buy' : 'Remove' }
+                 { this.props.productsInCart && this.renderButtonText()}
               </button>
             </form>
 					</Front>
