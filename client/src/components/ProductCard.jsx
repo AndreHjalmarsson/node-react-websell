@@ -21,7 +21,7 @@ const Img = styled.img`
 const ImgWrapper = styled.div`
 	background-color: #ededed;
 	width: 100%;
-	height: 50%;
+	height: 80%;
 	border-radius: 7px 7px 0px 0px;
 `;
 
@@ -29,6 +29,13 @@ const Front = styled.div`
 	background-color: #ededed;
 	height: 300px;
 	border-radius: 7px;
+`;
+
+const UpperFront = styled.div`
+	background-color: #ededed;
+	width: 100%;
+	height: 85%;
+	border-radius: 7px 7px 0px 0px;
 `;
 
 const Back = styled.div`
@@ -61,20 +68,22 @@ class ProductCard extends Component {
   }
  
   render() {
-    return <CardWrapper onClick={this.handleClick}>
+    return <CardWrapper>
 				<ReactCardFlip isFlipped={this.state.isFlipped}>
 					<Front key="front">
-						<ImgWrapper>
-							 <Img src={`${ROOT_URL}/uploads/${this.props.photo}`} alt={this.props.photo} />
-						</ImgWrapper> 
-            <Link to={`/product/${this.props.id}`}>{this.props.title}</Link>
+            <UpperFront onClick={this.handleClick}>
+              <ImgWrapper>
+                <Img src={`${ROOT_URL}/uploads/${this.props.photo}`} alt={this.props.photo} />
+              </ImgWrapper> 
+              <Link to={`/product/${this.props.id}`}>{this.props.title}</Link>
+            </UpperFront>
             <form onSubmit={this.handleSubmit}>
-              <button type="submit" className="btn btn-primary pull-xs-right push-xs-down">
+              <button type="submit" className="btn btn-primary pull-xs-right">
                  { this.props.productsInCart && this.renderButtonText()}
               </button>
             </form>
 					</Front>
-					<Back key="back">
+          <Back key="back" onClick={this.handleClick}>
 						<p>Back</p>
 						<p>Back</p>
 						<p>Back</p>
@@ -86,8 +95,7 @@ class ProductCard extends Component {
 
 function mapStateToProps(state) {
   return {
-    message: state.cart.message,
-    isInCart: state.cart.isInCart
+    message: state.cart.message
   }
 }
 
