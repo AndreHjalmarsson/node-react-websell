@@ -10,3 +10,10 @@ exports.addToCart = async (req, res) => {
   );
   res.send({ message: 'Added product to cart' });
 }
+
+exports.getCart = async (req, res) => {
+  const user = await User.findOne({ _id: req.user._id });
+  const cartProducts = user.cart;
+  res.send(cartProducts);
+  // res.send(req.user.cart);
+}

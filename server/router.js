@@ -42,5 +42,10 @@ router.post('/addtocart/:id',
   cartController.addToCart
 );
 
+router.get('/getcart',
+  requestAuth,
+  cartController.getCart
+);
+
 
 module.exports = router;

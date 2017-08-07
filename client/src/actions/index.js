@@ -104,8 +104,10 @@ export function addToCart(productId) {
   }
 }
 
-export function fetchCart(userId) {
+export function fetchCart() {
   return dispatch => {
-    axios.get(`${ROOT_URL}/getcart`)
+    axios.get(`${ROOT_URL}/getcart`, {
+      headers: { authorization: localStorage.getItem('token') }
+    })
   }
 }
