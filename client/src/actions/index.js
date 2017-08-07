@@ -8,7 +8,8 @@ import {
   GET_MESSAGE, 
   GET_PRODUCTS, 
   GET_PRODUCT, 
-  CART_ADD 
+  CART_ADD,
+  CART_FETCH
 } from '../actions/types';
 
 export const ROOT_URL = 'http://localhost:3002';
@@ -109,5 +110,6 @@ export function fetchCart() {
     axios.get(`${ROOT_URL}/getcart`, {
       headers: { authorization: localStorage.getItem('token') }
     })
+    .then(response => dispatch({ type: CART_FETCH, payload: response.data }))
   }
 }

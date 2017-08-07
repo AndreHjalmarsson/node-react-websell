@@ -6,8 +6,9 @@ import ProductCard from './ProductCard';
 
 class Home extends Component {
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.getProducts();
+    this.props.fetchCart();
   }
 
   productCard() {
@@ -24,11 +25,12 @@ class Home extends Component {
   }
 
   render() {
+    console.log(this.props.isInCart);
     return (
       <div>
         Home
         <div className="row">
-          {this.props.products ? this.productCard() : null}
+          {this.props.products && this.productCard()}
         </div>
       </div>
     );
@@ -37,7 +39,8 @@ class Home extends Component {
 
 function mapStateToProps(state) {
   return {
-    products: state.product.allProducts
+    products: state.product.allProducts,
+    isInCart: state.cart.isInCart
   }
 }
 

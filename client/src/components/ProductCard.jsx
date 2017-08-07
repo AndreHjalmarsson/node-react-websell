@@ -47,10 +47,6 @@ class ProductCard extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentDidMount() {
-    this.props.fetchCart();
-  }
-
   componentDidUpdate() {
     this.props.fetchCart();
   }
