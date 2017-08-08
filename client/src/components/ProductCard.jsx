@@ -58,17 +58,17 @@ class ProductCard extends Component {
     this.setState(() => !this.state.isFlipped ? { isFlipped: true } : { isFlipped: false });
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
+  handleSubmit() {
     this.props.addToCart(this.props.id);
-    this.props.fetchCart();
   }
 
   renderButtonText() {
-    return this.props.productsInCart.includes(this.props.id) ? 'Remove' : 'Buy';
+    const productIds = this.props.productsInCart.map(product => product._id);
+    return productIds.includes(this.props.id) ? 'Remove' : 'Buy';
   }
  
   render() {
+    this.props.pincart && console.log(this.props.pincart);
     return <CardWrapper>
 				<ReactCardFlip isFlipped={this.state.isFlipped}>
 					<Front key="front">
@@ -94,8 +94,7 @@ class ProductCard extends Component {
 
 function mapStateToProps(state) {
   return {
-    message: state.cart.message,
-    productsInCart: state.cart.productsInCart
+    pincart: state.cart.pincart
   }
 }
 

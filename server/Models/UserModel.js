@@ -22,6 +22,13 @@ const userSchema = new mongoose.Schema({
   ]
 });
 
+function autopop(next) {
+  this.populate('cart');
+  next();
+}
+
+userSchema.pre('findOne', autopop);
+
 // Adding plugins to manage user's password field and adding useful methods on 
 // the UserModel object
 userSchema.plugin(passportLocalMongoose, { usernameField: 'email' });

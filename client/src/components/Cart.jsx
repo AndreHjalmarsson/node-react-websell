@@ -3,6 +3,11 @@ import { connect } from 'react-redux';
 import * as actions from '../actions'; 
 
 class Cart extends Component {
+
+  componentDidMount() {
+    this.props.fetchCart();
+  }
+
   render() {
     return <div>
       my cart
@@ -10,4 +15,10 @@ class Cart extends Component {
   }
 }
 
-export default connect(null, actions)(Cart);
+function mapStateToProps(state) {
+  return {
+    products: state.cart.productsInCart
+  }
+}
+
+export default connect(mapStateToProps, actions)(Cart);
