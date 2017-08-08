@@ -67,12 +67,15 @@ class ProductCard extends Component {
   }
 
   renderButtonText() {
-    if(this.props.cartMessage) {
-      return this.props.cartMessage.includes(this.props.id) ? 'Remove' : 'Buy';
-    } else {
-    const productIds = this.props.productsInCart.map(product => product._id);
-    return productIds.includes(this.props.id) ? 'Remove' : 'Buy';
-    }
+    const { authed, cartMessage, productsInCart, id } = this.props;
+    if (authed) {
+      if (cartMessage) {
+        return cartMessage.includes(id) ? 'Remove' : 'Buy';
+      } else {
+        const productIds = productsInCart.map(product => product._id);
+        return productIds.includes(id) ? 'Remove' : 'Buy';
+      }
+    } else { return 'Buy'; }
   }
  
   render() {
@@ -102,7 +105,8 @@ class ProductCard extends Component {
 function mapStateToProps(state) {
   return {
     cartMessage: state.cart.message,
-    productsInCart: state.cart.productsInCart
+    productsInCart: state.cart.productsInCart,
+    authed: state.auth.authed
   }
 }
 
