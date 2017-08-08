@@ -17,6 +17,9 @@ class Header extends Component {
           <li className="nav-item">
             <Link to="/addproduct" className="nav-link">Sell</Link>
           </li>
+          <li className="nav-item">
+            <Link to="/cart" className="nav-link">Cart</Link>
+          </li>
         </div>
       );
     } else {

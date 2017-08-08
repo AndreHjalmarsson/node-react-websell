@@ -60,6 +60,7 @@ class ProductCard extends Component {
 
   handleSubmit() {
     this.props.addToCart(this.props.id);
+    console.log(this.props.cartMessage);
   }
 
   renderButtonText() {
@@ -68,7 +69,6 @@ class ProductCard extends Component {
   }
  
   render() {
-    this.props.pincart && console.log(this.props.pincart);
     return <CardWrapper>
 				<ReactCardFlip isFlipped={this.state.isFlipped}>
 					<Front key="front">
@@ -94,7 +94,7 @@ class ProductCard extends Component {
 
 function mapStateToProps(state) {
   return {
-    pincart: state.cart.pincart
+    cartMessage: state.cart.message
   }
 }
 
