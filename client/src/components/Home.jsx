@@ -8,7 +8,6 @@ class Home extends Component {
 
   componentDidMount() {
     this.props.getProducts();
-    this.props.fetchCart();
   }
 
   productCard() {
@@ -17,8 +16,7 @@ class Home extends Component {
       return (
         <div key={_id} className="col-md-4">
           <ProductCard key={_id} id={_id} title={title} description={description}
-          type={type} price={price} photo={photo} seller={seller} created={created} 
-          productsInCart={this.props.productsInCart}
+          type={type} price={price} photo={photo} seller={seller} created={created}
           />
         </div>
       );
@@ -39,8 +37,7 @@ class Home extends Component {
 
 function mapStateToProps(state) {
   return {
-    products: state.product.allProducts,
-    productsInCart: state.cart.productsInCart
+    products: state.product.allProducts
   }
 }
 

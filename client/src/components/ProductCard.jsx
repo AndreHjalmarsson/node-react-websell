@@ -53,6 +53,10 @@ class ProductCard extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  componentDidMount() {
+    this.props.fetchCart();
+  }
  
   handleClick() {
     this.setState(() => !this.state.isFlipped ? { isFlipped: true } : { isFlipped: false });
@@ -60,12 +64,15 @@ class ProductCard extends Component {
 
   handleSubmit() {
     this.props.addToCart(this.props.id);
-    console.log(this.props.cartMessage);
   }
 
   renderButtonText() {
+    if(this.props.cartMessage) {
+      return this.props.cartMessage.includes(this.props.id) ? 'Remove' : 'Buy';
+    } else {
     const productIds = this.props.productsInCart.map(product => product._id);
     return productIds.includes(this.props.id) ? 'Remove' : 'Buy';
+    }
   }
  
   render() {
@@ -94,7 +101,8 @@ class ProductCard extends Component {
 
 function mapStateToProps(state) {
   return {
-    cartMessage: state.cart.message
+    cartMessage: state.cart.message,
+    productsInCart: state.cart.productsInCart
   }
 }
 
