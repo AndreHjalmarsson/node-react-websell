@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
+import SearchField from './SearchField';
 import ProductCard from './ProductCard';
 
 class Home extends Component {
@@ -27,6 +28,7 @@ class Home extends Component {
     return (
       <div>
         Home
+        <SearchField />
         <div className="row">
           {this.props.products && this.productCard()}
         </div>
