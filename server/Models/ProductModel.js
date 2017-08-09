@@ -10,6 +10,11 @@ const productSchema = new mongoose.Schema({
   photo: String
 });
 
+productSchema.index({
+	title: 'text',
+	description: 'text'
+});
+
 // A function to populate the seller field with all the fields that it refenrences, in this case being the UserModel
 // this will take fields like name and email that exists in the usermodel and put it on the product.seller obj.
 function autopop(next) {

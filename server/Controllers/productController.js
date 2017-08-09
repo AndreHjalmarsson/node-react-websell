@@ -46,7 +46,14 @@ exports.getProduct = async (req, res) => {
   res.send(product);
 }
 
-exports.searchProducts = (req, res) => {
-  console.log(req.body);
-  res.send('hi');
+exports.searchProducts = async (req, res) => {
+  const products = await Product.find({
+    $text: {
+      $search: req.body.term
+    }
+  })
+  .limit(5);
+  console.log(products);
+
+  res.send(products);
 }

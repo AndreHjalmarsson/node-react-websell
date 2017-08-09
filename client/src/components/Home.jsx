@@ -25,6 +25,7 @@ class Home extends Component {
   }
 
   render() {
+    this.props.searchItems && console.log(this.props.searchItems);
     return (
       <div>
         Home
@@ -40,7 +41,7 @@ class Home extends Component {
 function mapStateToProps(state) {
   return {
     products: state.product.allProducts,
-    searchProducts: state.product.searchProducts
+    searchItems: state.product.searchProducts
   }
 }
 
