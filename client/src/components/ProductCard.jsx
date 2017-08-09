@@ -15,20 +15,20 @@ const CardWrapper = styled.div`
 const Img = styled.img`
 	max-width: 100%;
 	max-height: 100%;
-	border-radius: 7px 0px 0px 0px;
+  border-radius: 7px 0px 0px 0px;
 `;
 
 const ImgWrapper = styled.div`
 	background-color: #ededed;
 	width: 100%;
-	height: 80%;
-	border-radius: 7px 7px 0px 0px;
+	height: 70%;
+  border-radius: 7px 7px 0px 0px;
 `;
 
 const Front = styled.div`
 	background-color: #ededed;
 	height: 300px;
-	border-radius: 7px;
+  border-radius: 7px;
 `;
 
 const UpperFront = styled.div`
@@ -80,25 +80,27 @@ class ProductCard extends Component {
  
   render() {
     return <CardWrapper>
-				<ReactCardFlip isFlipped={this.state.isFlipped}>
-					<Front key="front">
-            <UpperFront onClick={this.handleClick}>
-              <ImgWrapper>
-                <Img src={`${ROOT_URL}/uploads/${this.props.photo}`} alt={this.props.photo} />
-              </ImgWrapper> 
-              <Link to={`/product/${this.props.id}`}>{this.props.title}</Link>
-            </UpperFront>
-            <button onClick={this.handleSubmit} className="btn btn-primary pull-xs-right">
-              { this.props.productsInCart && this.renderButtonText()}
-            </button>
-					</Front>
-          <Back key="back" onClick={this.handleClick}>
-						<p>Back</p>
-						<p>Back</p>
-						<p>Back</p>
-					</Back>
-				</ReactCardFlip>
-			</CardWrapper>;
+      <ReactCardFlip isFlipped={this.state.isFlipped}>
+        <Front key="front">
+          <UpperFront onClick={this.handleClick}>
+            <ImgWrapper>
+              <Img src={`${ROOT_URL}/uploads/${this.props.photo}`} alt={this.props.photo} />
+            </ImgWrapper> 
+            <Link to={`/product/${this.props.id}`}>{this.props.title}</Link>
+            {this.props.seller.name}
+            {this.props.id}
+          </UpperFront>
+          <button onClick={this.handleSubmit} className="btn btn-primary pull-xs-right">
+            { this.props.productsInCart && this.renderButtonText()}
+          </button>
+        </Front>
+        <Back key="back" onClick={this.handleClick}>
+          <p>Back</p>
+          <p>Back</p>
+          <p>Back</p>
+        </Back>
+      </ReactCardFlip>
+    </CardWrapper>;
   }
 };
 

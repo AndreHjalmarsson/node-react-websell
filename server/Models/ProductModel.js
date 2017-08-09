@@ -19,6 +19,7 @@ function autopop(next) {
 
 // telling when to do the seller autopop. In this case when we find a specific product we want to autopop the seller
 productSchema.pre('findOne', autopop);
+productSchema.pre('find', autopop);
 
 const ProductModel = mongoose.model('Product', productSchema);
 

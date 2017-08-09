@@ -24,7 +24,7 @@ exports.storeImage = async (req, res, next) => {
 	const photo = await jimp.read(req.file.buffer);
 	await photo.resize(800, jimp.AUTO);
 	await photo.write(`./public/uploads/${req.body.photo}`);
-	// once we have written the photo to our filesystem, keep going!
+	// once we have written the photo to our filesystem
 	next();
 };
 
