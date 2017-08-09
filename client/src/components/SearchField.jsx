@@ -21,7 +21,7 @@ class SearchField extends Component {
       <input
         onChange={this.handleChange}
         value={this.state.term}
-        placeholder="text"
+        placeholder="Search for products"
       />
     </div>
   }

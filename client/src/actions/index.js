@@ -7,7 +7,8 @@ import {
   ADD_PRODUCT, 
   GET_MESSAGE, 
   GET_PRODUCTS, 
-  GET_PRODUCT, 
+  GET_PRODUCT,
+  SEARCH_PRODUCTS, 
   CART_ADD,
   CART_FETCH
 } from '../actions/types';
@@ -101,7 +102,7 @@ export function addToCart(productId) {
     axios.post(`${ROOT_URL}/addtocart/${productId}`, null, {
       headers: { authorization: localStorage.getItem('token') }
     })
-    .then(response => dispatch({ type: CART_ADD, payload: response.data }))
+      .then(response => dispatch({ type: CART_ADD, payload: response.data }))
   }
 }
 
@@ -110,6 +111,13 @@ export function fetchCart() {
     axios.get(`${ROOT_URL}/getcart`, {
       headers: { authorization: localStorage.getItem('token') }
     })
-    .then(response => dispatch({ type: CART_FETCH, payload: response.data }))
+      .then(response => dispatch({ type: CART_FETCH, payload: response.data }))
+  }
+}
+
+export function searchProducts(term) {
+  return dispatch => {
+    axios.post(`${ROOT_URL}/searchproducts`, term)
+      .then(response => dispatch({ type: SEARCH_PRODUCTS, payload: response.data }))
   }
 }
