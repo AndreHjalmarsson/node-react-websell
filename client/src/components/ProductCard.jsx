@@ -89,6 +89,7 @@ class ProductCard extends Component {
             <Link to={`/product/${this.props.id}`}>{this.props.title}</Link>
             {this.props.seller.name}
             {this.props.id}
+            {this.props.description}
           </UpperFront>
           <button onClick={this.handleSubmit} className="btn btn-primary pull-xs-right">
             { this.props.productsInCart && this.renderButtonText()}
