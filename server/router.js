@@ -47,5 +47,7 @@ router.get('/getcart',
   cartController.getCart
 );
 
+router.post('/searchproducts', productController.searchProducts);
+
 
 module.exports = router;

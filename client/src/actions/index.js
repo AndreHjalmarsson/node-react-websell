@@ -117,7 +117,7 @@ export function fetchCart() {
 
 export function searchProducts(term) {
   return dispatch => {
-    axios.post(`${ROOT_URL}/searchproducts`, term)
+    axios.post(`${ROOT_URL}/searchproducts`, {term})
       .then(response => dispatch({ type: SEARCH_PRODUCTS, payload: response.data }))
   }
 }

@@ -39,7 +39,8 @@ class Home extends Component {
 
 function mapStateToProps(state) {
   return {
-    products: state.product.allProducts
+    products: state.product.allProducts,
+    searchProducts: state.product.searchProducts
   }
 }
 

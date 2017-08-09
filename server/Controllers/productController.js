@@ -45,3 +45,8 @@ exports.getProduct = async (req, res) => {
   const product = await Product.findOne({ _id: req.params.id });
   res.send(product);
 }
+
+exports.searchProducts = (req, res) => {
+  console.log(req.body);
+  res.send('hi');
+}

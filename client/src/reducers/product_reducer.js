@@ -1,4 +1,4 @@
-import { ADD_PRODUCT, GET_PRODUCTS, GET_PRODUCT } from '../actions/types';
+import { ADD_PRODUCT, GET_PRODUCTS, GET_PRODUCT, SEARCH_PRODUCTS } from '../actions/types';
 
 export default function(state={}, action) {
   switch(action.type) {
@@ -8,6 +8,8 @@ export default function(state={}, action) {
       return { ...state, allProducts: action.payload }
     case GET_PRODUCT:
       return { ...state, singleProduct: action.payload }
+    case SEARCH_PRODUCTS:
+      return { ...state, searchProducts: action.payload }
   }
 
   return state;
