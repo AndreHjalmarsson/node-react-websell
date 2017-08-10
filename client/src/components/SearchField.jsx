@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
+import { PRODUCT_TYPES } from '../helpers';
 
 class SearchField extends Component {
 
@@ -12,6 +13,7 @@ class SearchField extends Component {
   }
 
   handleChange(e) {
+    console.log(e);
     this.props.searchProducts(e.currentTarget.value);
     this.setState({term: e.currentTarget.value})
   }
@@ -23,6 +25,12 @@ class SearchField extends Component {
         value={this.state.term}
         placeholder="Search for products"
       />
+      <select onChange={this.handleChange}>
+        <option />
+          {
+            PRODUCT_TYPES.map(type => <option key={type} value={type}>{type}</option>)
+          }
+      </select> 
     </div>
   }
 }

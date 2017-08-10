@@ -38,9 +38,9 @@ class AddProduct extends Component {
         <label>{label}</label>
         <select className="form-control" {...input}>
           <option />
-          <option value="Books">Books</option>
-          <option value="Movies">Movies</option>
-          <option value="Electronics">Electronics</option>
+          {
+            PRODUCT_TYPES.map(type => <option key={type} value={type}>{type}</option>)
+          }
         </select>
       </div>
     )
