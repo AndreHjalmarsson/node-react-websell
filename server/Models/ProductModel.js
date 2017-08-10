@@ -12,7 +12,8 @@ const productSchema = new mongoose.Schema({
 
 productSchema.index({
 	title: 'text',
-	description: 'text'
+  description: 'text',
+  type: 'text'
 });
 
 // A function to populate the seller field with all the fields that it refenrences, in this case being the UserModel

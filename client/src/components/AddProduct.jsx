@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import Dropzone from 'react-dropzone';
+import { PRODUCT_TYPES } from '../helpers';
 import * as actions from '../actions';
 
 class AddProduct extends Component {
@@ -66,21 +67,26 @@ class AddProduct extends Component {
   }
 
   render() {
+    console.log(PRODUCT_TYPES);
     const { handleSubmit } = this.props;
 
-    return (
-     <form onSubmit={handleSubmit(this.handleProductForm.bind(this))} encType="multipart/form-data">
+    return <form onSubmit={handleSubmit(this.handleProductForm.bind(this))} encType="multipart/form-data">
 				<Field label="Title:" name="title" type="text" component={this.renderField} />
 				<Field label="Description:" name="description" type="text" component={this.renderField} />
-				<Field label="Type:" name="type" type="text" component={this.renderField} />
+				<Field label="Type:" name="type" component="select">
+					<option />
+					<option value="Books">Books</option>
+					<option value="Electronics">Electronics</option>
+					<option value="Sports">Sports</option>
+					<option value="Games">Games</option>
+				</Field>
 				<Field label="Price:" name="price" type="number" component={this.renderField} />
 				<Field label="Photo:" name="photo" type="file" component={this.renderDropField.bind(this)} />
 				{this.renderAlert()}
 				<button type="submit" className="btn btn-primary">
 					Add product
 				</button>
-	  	</form>
-    );
+			</form>;
   }
 }
 

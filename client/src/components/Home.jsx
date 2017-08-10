@@ -38,7 +38,6 @@ class Home extends Component {
   }
 
   render() {
-    this.props.searchItems && console.log(this.props.searchItems);
     return (
       <div>
         Home

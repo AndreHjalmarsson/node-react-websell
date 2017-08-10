@@ -52,8 +52,6 @@ exports.searchProducts = async (req, res) => {
       $search: req.body.term
     }
   })
-  .limit(5);
-  console.log(products);
-
+  .limit(10);
   res.send(products);
 }
