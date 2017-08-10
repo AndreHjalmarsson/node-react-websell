@@ -8,30 +8,25 @@ class SearchField extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { term: '' }
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(e) {
-    console.log(e);
-    this.props.searchProducts(e.currentTarget.value);
-    this.setState({term: e.currentTarget.value})
+  handleChange() {
+    console.log(this.searchInput.value);
+    console.log(this.searchSelect.value);
+    this.props.searchProducts(this.searchInput.value);
   }
 
   render() {
     return <div>
-      <input
-        onChange={this.handleChange}
-        value={this.state.term}
-        placeholder="Search for products"
-      />
-      <select onChange={this.handleChange}>
-        <option />
-          {
-            PRODUCT_TYPES.map(type => <option key={type} value={type}>{type}</option>)
-          }
-      </select> 
-    </div>
+				<input onChange={this.handleChange} ref={input => this.searchInput = input} placeholder="Search for products" />
+				<select onChange={this.handleChange} ref={select => this.searchSelect = select}>
+					<option>Choose here</option>
+					{PRODUCT_TYPES.map(type => <option key={type}>
+							{type}
+						</option>)}
+				</select>
+			</div>;
   }
 }
 
