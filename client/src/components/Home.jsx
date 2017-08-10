@@ -27,7 +27,14 @@ class Home extends Component {
   searchProductsList() {
     return this.props.searchItems.map(product => {
       const { _id, title, description, type, price, photo, seller, created } = product;
-    })
+      return (
+        <div key={_id} className="col-md-4">
+          <ProductCard key={_id} id={_id} title={title} description={description}
+          type={type} price={price} photo={photo} seller={seller} created={created}
+          />
+        </div>
+      );
+    });
   }
 
   render() {
@@ -38,7 +45,7 @@ class Home extends Component {
         <SearchField />
         <div className="row">
           {
-            this.props.searchItems ? this.searchProductsList()
+            this.props.searchItems && this.props.searchItems.length ? this.searchProductsList()
             : this.props.products && this.allProductsList()
           }
         </div>
