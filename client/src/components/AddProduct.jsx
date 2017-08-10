@@ -30,6 +30,22 @@ class AddProduct extends Component {
     );
   }
 
+  renderSelectField(field) {
+    const { label, type, input, meta: { touched, error } } = field;
+    const classname = `form-group ${touched && error ? 'has-danger' : ''}`;
+    return (
+      <div className={classname}>
+        <label>{label}</label>
+        <select className="form-control" {...input}>
+          <option />
+          <option value="Books">Books</option>
+          <option value="Movies">Movies</option>
+          <option value="Electronics">Electronics</option>
+        </select>
+      </div>
+    )
+  }
+
   renderDropField(field) {
 		return (
      <div>
@@ -67,19 +83,12 @@ class AddProduct extends Component {
   }
 
   render() {
-    console.log(PRODUCT_TYPES);
     const { handleSubmit } = this.props;
 
     return <form onSubmit={handleSubmit(this.handleProductForm.bind(this))} encType="multipart/form-data">
 				<Field label="Title:" name="title" type="text" component={this.renderField} />
 				<Field label="Description:" name="description" type="text" component={this.renderField} />
-				<Field label="Type:" name="type" component="select">
-					<option />
-					<option value="Books">Books</option>
-					<option value="Electronics">Electronics</option>
-					<option value="Sports">Sports</option>
-					<option value="Games">Games</option>
-				</Field>
+				<Field label="Type:" name="type" component={this.renderSelectField} />
 				<Field label="Price:" name="price" type="number" component={this.renderField} />
 				<Field label="Photo:" name="photo" type="file" component={this.renderDropField.bind(this)} />
 				{this.renderAlert()}
