@@ -4,6 +4,10 @@ import * as actions from '../actions';
 
 class Profile extends Component {
 
+  componentDidMount() {
+    this.props.getUser(this.props.match.params.id);
+  }
+
 	render() {
 		return (
 			<div>
@@ -13,4 +17,10 @@ class Profile extends Component {
 	}
 }
 
-export default connect(null, actions)(Profile);
+function mapStateToProps(state) {
+  return {
+    user: state.user.user
+  }
+}
+
+export default connect(mapStateToProps, actions)(Profile);
