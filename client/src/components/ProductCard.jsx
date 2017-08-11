@@ -80,27 +80,30 @@ class ProductCard extends Component {
  
   render() {
     return <CardWrapper>
-      <ReactCardFlip isFlipped={this.state.isFlipped}>
-        <Front key="front">
-          <UpperFront onClick={this.handleClick}>
-            <ImgWrapper>
-              <Img src={`${ROOT_URL}/uploads/${this.props.photo}`} alt={this.props.photo} />
-            </ImgWrapper> 
-            <Link to={`/product/${this.props.id}`}>{this.props.title}</Link>
-            {this.props.seller.name}
-            {this.props.type}
-          </UpperFront>
-          <button onClick={this.handleSubmit} className="btn btn-primary pull-xs-right">
-            { this.props.productsInCart && this.renderButtonText()}
-          </button>
-        </Front>
-        <Back key="back" onClick={this.handleClick}>
-          <p>Back</p>
-          <p>Back</p>
-          <p>Back</p>
-        </Back>
-      </ReactCardFlip>
-    </CardWrapper>;
+				<ReactCardFlip isFlipped={this.state.isFlipped}>
+					<Front key="front">
+						<UpperFront onClick={this.handleClick}>
+							<ImgWrapper>
+								<Img src={`${ROOT_URL}/uploads/${this.props.photo}`} alt={this.props.photo} />
+							</ImgWrapper>
+							<Link to={`/product/${this.props.id}`}>
+								{this.props.title}
+							</Link>
+							{this.props.type}
+						</UpperFront>
+						<button onClick={this.handleSubmit} className="btn btn-primary pull-xs-right">
+							{this.props.productsInCart && this.renderButtonText()}
+						</button>
+					</Front>
+					<Back key="back" onClick={this.handleClick}>
+						<Link to={`/user/${this.props.seller._id}`}>
+							{this.props.seller.name}
+						</Link>
+						<p>Back</p>
+						<p>Back</p>
+					</Back>
+				</ReactCardFlip>
+			</CardWrapper>;
   }
 };
 

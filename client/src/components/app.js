@@ -9,6 +9,7 @@ import AddProduct from './AddProduct.jsx';
 import Home from './Home.jsx';
 import ShowProduct from './ShowProduct.jsx';
 import Cart from './Cart.jsx';
+import Profile from './Profile.jsx';
 
 import styled from 'styled-components';
 
@@ -26,6 +27,7 @@ export default class App extends Component {
           </HeaderStyle>
           <Switch>
             <Route path="/product/:id" component={ShowProduct} />
+            <Route path="/user/:id" component={Profile} />
             <Route path="/cart" component={Cart} />
             <Route path="/addproduct" component={AddProduct} />
             <Route path="/login" component={Login} />

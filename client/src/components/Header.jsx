@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import * as actions from '../actions';
 
 class Header extends Component {
+
+  componentDidMount() {
+    this.props.authed && this.props.getCurrentUser();
+  }
 
   renderLinks() {
     const { authed } = this.props;
@@ -54,4 +59,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(Header)
+export default connect(mapStateToProps, actions)(Header)
