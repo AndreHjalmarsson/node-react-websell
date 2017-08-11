@@ -67,7 +67,3 @@ exports.login = (req, res) => {
   res.send({ token });
   
 };
-
-exports.currentUser = (req, res) => {
-  res.send(req.user);
-}

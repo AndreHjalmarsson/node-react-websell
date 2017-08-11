@@ -9,6 +9,7 @@ class Profile extends Component {
   }
 
 	render() {
+    this.props.user && console.log(this.props.user);
 		return (
 			<div>
 				Profile

@@ -9,3 +9,4 @@ export const GET_PRODUCT = 'get_product';
 export const CART_ADD = 'cart_add';
 export const CART_FETCH = 'cart_fetch';
 export const SEARCH_PRODUCTS = 'search_products';
+export const USER_GET = 'user_get';

@@ -11,7 +11,8 @@ import {
   GET_PRODUCT,
   SEARCH_PRODUCTS, 
   CART_ADD,
-  CART_FETCH
+  CART_FETCH,
+  USER_GET
 } from '../actions/types';
 
 export const ROOT_URL = 'http://localhost:3002';
@@ -135,5 +136,14 @@ export function searchProducts(term, type) {
   return dispatch => {
     axios.post(`${ROOT_URL}/searchproducts`, {term, type})
       .then(response => dispatch({ type: SEARCH_PRODUCTS, payload: response.data }))
+  }
+}
+
+export function getUser(id) {
+  return dispatch => {
+    axios.get(`${ROOT_URL}/getuser/${id}`)
+      .then(res => 
+        dispatch({ type: USER_GET, payload: res.data })
+      )
   }
 }

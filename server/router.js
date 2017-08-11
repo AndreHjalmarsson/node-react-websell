@@ -5,6 +5,7 @@ const passportService = require('./services/passport');
 const authController = require('./Controllers/authController');
 const productController = require('./Controllers/productController');
 const cartController = require('./Controllers/cartController');
+const userController = require('./Controllers/userController');
 
 // Passport local strategy works as login middleware.
 const router = express.Router();
@@ -18,7 +19,11 @@ router.get('/',
 
 router.get('/currentuser',
   jwtAuth,
-  authController.currentUser
+  userController.currentUser
+)
+
+router.get('/getuser/:id',
+  userController.getUser
 )
 
 router.post('/register', 
