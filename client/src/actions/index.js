@@ -3,7 +3,8 @@ import axios from 'axios';
 import { 
   AUTH_USER, 
   AUTH_ERROR, 
-  UNAUTH_USER, 
+  UNAUTH_USER,
+  AUTH_CURRENT,
   ADD_PRODUCT, 
   GET_MESSAGE, 
   GET_PRODUCTS, 
@@ -50,6 +51,18 @@ export function loginUser(values, callback) {
         callback();
       })
       .catch(() => dispatch(authError('Bad Login')));
+  }
+}
+
+export function getCurrentUser() {
+  return dispatch => {
+    axios
+			.get(`${ROOT_URL}/currentuser`, {
+				headers: { authorization: localStorage.getItem('token') }
+			})
+			.then(response =>
+				dispatch({ type: AUTH_CURRENT, payload: response.data })
+			);
   }
 }
 

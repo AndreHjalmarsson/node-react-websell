@@ -9,12 +9,17 @@ const cartController = require('./Controllers/cartController');
 // Passport local strategy works as login middleware.
 const router = express.Router();
 const loginAuth = passport.authenticate('local', { session: false });
-const requestAuth = passport.authenticate('jwt', { session: false });
+const jwtAuth = passport.authenticate('jwt', { session: false });
 
 router.get('/', 
-  requestAuth,
+  jwtAuth,
   authController.getIndex
 );
+
+router.get('/currentuser',
+  jwtAuth,
+  authController.currentUser
+)
 
 router.post('/register', 
   authController.validateRegistration,
@@ -27,7 +32,7 @@ router.post('/login',
 );
 
 router.post('/addproduct', 
-  requestAuth,
+  jwtAuth,
   productController.upload,
   productController.storeImage,
   productController.addProduct
@@ -38,12 +43,12 @@ router.get('/getproducts', productController.getProducts);
 router.get('/getproduct/:id', productController.getProduct);
 
 router.post('/addtocart/:id',
-  requestAuth,
+  jwtAuth,
   cartController.addToCart
 );
 
 router.get('/getcart',
-  requestAuth,
+  jwtAuth,
   cartController.getCart
 );
 

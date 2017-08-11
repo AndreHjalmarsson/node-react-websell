@@ -12,13 +12,16 @@ class Header extends Component {
   renderLinks() {
     const { authed } = this.props;
 
-    if (authed) {
+    if (authed && this.props.currentUser) {
       return (
         <div>
           {this.props.children}
           <li className="nav-item pull-xs-right">
-          <Link to="/logout" className="nav-link">Logout</Link>
+            <Link to="/logout" className="nav-link">Logout</Link>
           </li>
+           <li className="nav-item pull-xs-right">
+            <Link to={`/user/${this.props.currentUser._id}`} className="nav-link">Profle</Link>
+          </li> 
           <li className="nav-item">
             <Link to="/addproduct" className="nav-link">Sell</Link>
           </li>
@@ -55,7 +58,8 @@ class Header extends Component {
 
 function mapStateToProps(state) {
   return {
-    authed: state.auth.authed
+    authed: state.auth.authed,
+    currentUser: state.auth.current
   }
 }
 
