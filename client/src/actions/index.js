@@ -53,7 +53,7 @@ export function loginUser(values, callback) {
   }
 }
 
-export function addProduct(values) {
+export function addProduct(values, callback) {
   return dispatch => {
 		let data = new FormData();
 		Object.keys(values).forEach(key => {
@@ -64,7 +64,8 @@ export function addProduct(values) {
 				headers: { authorization: localStorage.getItem('token') }
 			})
 			.then(response => {
-				dispatch({ type: ADD_PRODUCT, payload: response.data.message });
+        dispatch({ type: ADD_PRODUCT, payload: response.data.message });
+        callback();
 			})
 			.catch(() => dispatch(authError('Could not add product to store')));
 	};
@@ -102,7 +103,9 @@ export function addToCart(productId) {
     axios.post(`${ROOT_URL}/addtocart/${productId}`, null, {
       headers: { authorization: localStorage.getItem('token') }
     })
-      .then(response => dispatch({ type: CART_ADD, payload: response.data }))
+      .then(response => {
+        dispatch({ type: CART_ADD, payload: response.data });
+      })
   }
 }
 
@@ -115,9 +118,9 @@ export function fetchCart() {
   }
 }
 
-export function searchProducts(term) {
+export function searchProducts(term, type) {
   return dispatch => {
-    axios.post(`${ROOT_URL}/searchproducts`, {term})
+    axios.post(`${ROOT_URL}/searchproducts`, {term, type})
       .then(response => dispatch({ type: SEARCH_PRODUCTS, payload: response.data }))
   }
 }

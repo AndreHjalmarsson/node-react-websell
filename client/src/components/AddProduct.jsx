@@ -79,7 +79,7 @@ class AddProduct extends Component {
   }
 
   handleProductForm(values) {
-    this.props.addProduct(values);
+    this.props.addProduct(values, () => this.props.history.push('/'));
   }
 
   render() {

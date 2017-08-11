@@ -14,14 +14,14 @@ class SearchField extends Component {
   handleChange() {
     console.log(this.searchInput.value);
     console.log(this.searchSelect.value);
-    this.props.searchProducts(this.searchInput.value);
+    this.props.searchProducts(this.searchInput.value, this.searchSelect.value);
   }
 
   render() {
     return <div>
 				<input onChange={this.handleChange} ref={input => this.searchInput = input} placeholder="Search for products" />
 				<select onChange={this.handleChange} ref={select => this.searchSelect = select}>
-					<option>Choose here</option>
+					<option value="">Category</option>
 					{PRODUCT_TYPES.map(type => <option key={type}>
 							{type}
 						</option>)}

@@ -32,6 +32,7 @@ exports.addProduct = async (req, res) => {
   req.body.seller = req.user.id;
   const product = new Product(req.body);
   await product.save();
+  res.send({ message: 'Added product' });
 }
 
 exports.getProducts = async (req, res) => {
@@ -47,6 +48,7 @@ exports.getProduct = async (req, res) => {
 }
 
 exports.searchProducts = async (req, res) => {
+  console.log(req.body);
   const products = await Product.find({
     $text: {
       $search: req.body.term
