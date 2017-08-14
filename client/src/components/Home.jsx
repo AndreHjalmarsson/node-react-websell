@@ -17,7 +17,7 @@ class Home extends Component {
       return (
         <div key={_id} className="col-md-4">
           <ProductCard key={_id} id={_id} title={title} description={description}
-          type={type} price={price} photo={photo} seller={seller} created={created}
+            type={type} price={price} photo={photo} seller={seller} created={created}
           />
         </div>
       );
@@ -30,7 +30,7 @@ class Home extends Component {
       return (
         <div key={_id} className="col-md-4">
           <ProductCard key={_id} id={_id} title={title} description={description}
-          type={type} price={price} photo={photo} seller={seller} created={created}
+            type={type} price={price} photo={photo} seller={seller} created={created}
           />
         </div>
       );
@@ -38,14 +38,16 @@ class Home extends Component {
   }
 
   render() {
+    const { searchItems, products } = this.props;
     return (
       <div>
         Home
         <SearchField />
         <div className="row">
           {
-            this.props.searchItems && this.props.searchItems.length ? this.searchProductsList()
-            : this.props.products && this.allProductsList()
+            searchItems && searchItems.length ?
+              this.searchProductsList() :
+              products && this.allProductsList()
           }
         </div>
       </div>

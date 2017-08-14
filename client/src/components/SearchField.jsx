@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import * as actions from '../actions';
-import { PRODUCT_TYPES } from '../helpers';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import * as actions from "../actions";
+import { PRODUCT_TYPES } from "../helpers";
 
 class SearchField extends Component {
-
   constructor(props) {
     super(props);
 
@@ -12,21 +11,23 @@ class SearchField extends Component {
   }
 
   handleChange() {
-    console.log(this.searchInput.value);
-    console.log(this.searchSelect.value);
     this.props.searchProducts(this.searchInput.value, this.searchSelect.value);
   }
 
   render() {
-    return <div>
-				<input onChange={this.handleChange} ref={input => this.searchInput = input} placeholder="Search for products" />
-				<select onChange={this.handleChange} ref={select => this.searchSelect = select}>
-					<option value="">Category</option>
-					{PRODUCT_TYPES.map(type => <option key={type}>
-							{type}
-						</option>)}
-				</select>
-			</div>;
+    return (
+      <div>
+        <input onChange={this.handleChange} ref={input => (this.searchInput = input)} placeholder="Search for products" />
+        <select onChange={this.handleChange} ref={select => (this.searchSelect = select)} >
+          <option value="">Category</option>
+          {PRODUCT_TYPES.map(type =>
+            <option key={type}>
+              {type}
+            </option>
+          )}
+        </select>
+      </div>
+    );
   }
 }
 
