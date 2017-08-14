@@ -8,11 +8,17 @@ class Profile extends Component {
     this.props.getUser(this.props.match.params.id);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.match.params.id !== this.props.match.params.id) {
+      this.props.getUser(nextProps.match.params.id);
+    }
+  }
+
 	render() {
-    this.props.user && console.log(this.props.user);
 		return (
 			<div>
 				Profile
+        {this.props.user && this.props.user.name}
 			</div>
 		);
 	}
