@@ -10,12 +10,19 @@ class EditProduct extends Component {
     this.props.getProduct(this.props.match.params.id);
   }
 
+  renderProductForm() {
+    const { title, description, price, type } = this.props.product;
+    return (
+      <AddProduct title={title} description={description} price={price} type={type} />
+    );
+  }
+
   render() {
     return (
       <div>
         Edit Product
         <div>
-          {this.props.product ? <AddProduct /> : 'No such product found'}
+          {this.props.product ? this.renderProductForm() : 'No such product found'}
         </div>
       </div>
     );

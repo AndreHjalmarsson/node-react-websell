@@ -13,7 +13,7 @@ class AddProduct extends Component {
   }
 
   renderField(field) {
-    const { label, type, input, meta: { touched, error } } = field;
+    const { label, type, placeholder, input, meta: { touched, error } } = field;
     const classname = `form-group ${touched && error ? "has-danger" : ""}`;
     return (
       <div className={classname}>
@@ -120,5 +120,8 @@ function mapStateToProps(state) {
 
 export default reduxForm({
   validate,
-  form: "productForm"
+  form: "productForm",
+  initialValues: {
+    title: "hiwd"
+  }
 })(connect(mapStateToProps, actions)(AddProduct));
