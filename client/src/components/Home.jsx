@@ -9,6 +9,7 @@ class Home extends Component {
 
   componentDidMount() {
     this.props.getProducts();
+    this.props.authed && this.props.getCurrentUser();
   }
 
   allProductsList() {
@@ -18,6 +19,7 @@ class Home extends Component {
         <div key={_id} className="col-md-4">
           <ProductCard key={_id} id={_id} title={title} description={description}
             type={type} price={price} photo={photo} seller={seller} created={created}
+            currentUser={this.props.currentUser._id}
           />
         </div>
       );
@@ -31,6 +33,7 @@ class Home extends Component {
         <div key={_id} className="col-md-4">
           <ProductCard key={_id} id={_id} title={title} description={description}
             type={type} price={price} photo={photo} seller={seller} created={created}
+            currentUser={this.props.currentUser._id}
           />
         </div>
       );
@@ -38,16 +41,16 @@ class Home extends Component {
   }
 
   render() {
-    const { searchItems, products } = this.props;
+    const { searchItems, products, currentUser } = this.props;
     return (
       <div>
         Home
         <SearchField />
         <div className="row">
           {
-            searchItems && searchItems.length ?
+            searchItems && currentUser && searchItems.length ?
               this.searchProductsList() :
-              products && this.allProductsList()
+              products && currentUser && this.allProductsList()
           }
         </div>
       </div>
@@ -58,7 +61,9 @@ class Home extends Component {
 function mapStateToProps(state) {
   return {
     products: state.product.allProducts,
-    searchItems: state.product.searchProducts
+    searchItems: state.product.searchProducts,
+    authed: state.auth.authed,
+    currentUser: state.auth.current
   }
 }
 

@@ -81,6 +81,10 @@ class ProductCard extends Component {
     }
   }
 
+  renderEdit() {
+
+  }
+
   render() {
     return (
       <CardWrapper>
@@ -94,7 +98,7 @@ class ProductCard extends Component {
                 {this.props.title}
               </Link>
             </UpperFront>
-            {/* {this.props.user && this.props.user === this.props.seller.id ? console.log('hi') : null}  */}
+            {this.props.currentUser === this.props.seller._id ? this.renderEdit() : null}
             <button onClick={this.handleSubmit} className="btn btn-primary pull-xs-right">
               {this.props.productsInCart && this.renderButtonText()}
             </button>
