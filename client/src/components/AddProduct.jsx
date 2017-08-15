@@ -54,22 +54,15 @@ class AddProduct extends Component {
         {/* Dropzone will create an array of files with various props on and send as value to the backend,
         to avoid this we select only the first item in the array we also put
         the uploaded files to our comp state in order to show a preview of the added photo before submiting */}
-        <Dropzone
-          name={field.name}
+        <Dropzone name={field.name}
           onDrop={(filesToUpload, e) => {
             this.setState({ files: filesToUpload });
             return field.input.onChange(filesToUpload[0]);
-          }}
-        >
+          }}>
           <div>
             {/* If a file is uploaded show the preview  */}
-            {field.input.value
-              ? <img
-                  width="195"
-                  height="195"
-                  src={this.state.files.map(file => file.preview)}
-                  alt=""
-                />
+            {field.input.value ?
+              <img width="195" height="195" src={this.state.files.map(file => file.preview)} alt="" />
               : "Add an image"}
           </div>
         </Dropzone>
@@ -100,31 +93,11 @@ class AddProduct extends Component {
         onSubmit={handleSubmit(this.handleProductForm.bind(this))}
         encType="multipart/form-data"
       >
-        <Field
-          label="Title:"
-          name="title"
-          type="text"
-          component={this.renderField}
-        />
-        <Field
-          label="Description:"
-          name="description"
-          type="text"
-          component={this.renderField}
-        />
+        <Field label="Title:" name="title" type="text" component={this.renderField} />
+        <Field label="Description:" name="description" type="text" component={this.renderField} />
         <Field label="Type:" name="type" component={this.renderSelectField} />
-        <Field
-          label="Price:"
-          name="price"
-          type="number"
-          component={this.renderField}
-        />
-        <Field
-          label="Photo:"
-          name="photo"
-          type="file"
-          component={this.renderDropField.bind(this)}
-        />
+        <Field label="Price:" name="price" type="number" component={this.renderField} />
+        <Field label="Photo:" name="photo" type="file" component={this.renderDropField.bind(this)} />
         {this.renderAlert()}
         <button type="submit" className="btn btn-primary">
           Add product

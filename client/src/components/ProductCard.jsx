@@ -82,7 +82,11 @@ class ProductCard extends Component {
   }
 
   renderEdit() {
-
+    return (
+      <Link to={`/product/edit/${this.props.id}`}>
+        Edit
+      </Link>
+    );
   }
 
   render() {

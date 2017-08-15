@@ -10,7 +10,7 @@ class Profile extends Component {
   componentWillReceiveProps(nextProps) {
     // If we change user when profile comp is mounted it will not remount since we're still on the same route
     // this is why we check if the url is changed with nextProps, if it is changed we make a new dispatch to the
-    // backend with the updated params from the url
+    // backend with the updated params from the url as argument
     if (nextProps.match.params.id !== this.props.match.params.id) {
       this.props.getUser(nextProps.match.params.id);
     }
