@@ -20,7 +20,7 @@ class AddProduct extends Component {
         <label>
           {label}
         </label>
-        <input className="form-control" type={type} {...input} />
+        <input className="form-control" type={type} placeholder={placeholder} {...input} />
         <div className="error">
           {touched ? error : ""}
         </div>
@@ -93,11 +93,11 @@ class AddProduct extends Component {
         onSubmit={handleSubmit(this.handleProductForm.bind(this))}
         encType="multipart/form-data"
       >
-        <Field label="Title:" name="title" type="text" component={this.renderField} />
-        <Field label="Description:" name="description" type="text" component={this.renderField} />
-        <Field label="Type:" name="type" component={this.renderSelectField} />
-        <Field label="Price:" name="price" type="number" component={this.renderField} />
-        <Field label="Photo:" name="photo" type="file" component={this.renderDropField.bind(this)} />
+        <Field name="title" type="text" placeholder="Title" component={this.renderField} />
+        <Field name="description" placeholder="Description" type="text" component={this.renderField} />
+        <Field name="type" component={this.renderSelectField} />
+        <Field name="price" placeholder="Price" type="number" component={this.renderField} />
+        <Field name="photo" type="file" component={this.renderDropField.bind(this)} />
         {this.renderAlert()}
         <button type="submit" className="btn btn-primary">
           Add product
@@ -120,8 +120,5 @@ function mapStateToProps(state) {
 
 export default reduxForm({
   validate,
-  form: "productForm",
-  initialValues: {
-    title: "hiwd"
-  }
+  form: "productForm"
 })(connect(mapStateToProps, actions)(AddProduct));
