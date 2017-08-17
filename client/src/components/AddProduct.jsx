@@ -12,6 +12,7 @@ class AddProduct extends Component {
     this.state = { files: [] };
     this.handleAddForm = this.handleAddForm.bind(this);
     this.handleEditForm = this.handleEditForm.bind(this);
+    this.renderDeleteButton = this.renderDeleteButton.bind(this);
   }
 
   renderField(field) {
@@ -91,6 +92,14 @@ class AddProduct extends Component {
     this.props.editProduct(values, this.props.id);
   }
 
+  renderDeleteButton() {
+    return (
+      <button onClick={() => this.props.deleteProduct(this.props.id)}>
+        Remove product
+      </button>
+    )
+  }
+
   render() {
     const { handleSubmit, ifEdit } = this.props;
     return (
@@ -109,6 +118,7 @@ class AddProduct extends Component {
         <button type="submit" className="btn btn-primary">
           {ifEdit ? 'Update' : 'Add product'}
         </button>
+        {ifEdit && this.renderDeleteButton()}
       </form>
     );
   }

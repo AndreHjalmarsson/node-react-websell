@@ -157,3 +157,9 @@ export function editProduct(values, id) {
       .then(res => dispatch({ type: PRODUCTS_EDIT, payload: res.data }))
   }
 }
+
+export function deleteProduct(id) {
+  return dispatch => {
+    axios.post(`${ROOT_URL}/deleteproduct/${id}`);
+  }
+}

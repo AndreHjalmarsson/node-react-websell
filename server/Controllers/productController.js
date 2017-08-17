@@ -58,10 +58,13 @@ exports.searchProducts = async (req, res) => {
 }
 
 exports.editProduct = async (req, res) => {
-  console.log(req.params.id);
-  console.log(req.body);
   const editedProduct = await Product.findOneAndUpdate({ _id: req.params.id }, req.body, {
     new: true
   }).exec();
   res.send(editedProduct);
+}
+
+exports.deleteProduct = async (req, res) => {
+  await Product.findOneAndRemove({ _id: req.params.id });
+  res.send({ message: 'item removed' });
 }
