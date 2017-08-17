@@ -4,28 +4,28 @@ const jimp = require('jimp');
 const uuid = require('uuid');
 
 const multerOptions = {
-	storage: multer.memoryStorage(),
-	fileFilter(req, file, next) {
-		const isPhoto = file.mimetype.startsWith('image/');
-		isPhoto ? next(null, true) : next({ message: "Filetype not allowed" }, false);
-	}
+  storage: multer.memoryStorage(),
+  fileFilter(req, file, next) {
+    const isPhoto = file.mimetype.startsWith('image/');
+    isPhoto ? next(null, true) : next({ message: "Filetype not allowed" }, false);
+  }
 };
 
 exports.upload = multer(multerOptions).single('photo');
 
 exports.storeImage = async (req, res, next) => {
-	if (!req.file) {
-		next(); // skip to the next middleware
-		return;
-	}
-	const extension = req.file.mimetype.split('/')[1];
-	req.body.photo = `${uuid.v4()}.${extension}`;
-	// now we resize
-	const photo = await jimp.read(req.file.buffer);
-	await photo.resize(800, jimp.AUTO);
-	await photo.write(`./public/uploads/${req.body.photo}`);
-	// once we have written the photo to our filesystem
-	next();
+  if (!req.file) {
+    next(); // skip to the next middleware
+    return;
+  }
+  const extension = req.file.mimetype.split('/')[1];
+  req.body.photo = `${uuid.v4()}.${extension}`;
+  // now we resize
+  const photo = await jimp.read(req.file.buffer);
+  await photo.resize(800, jimp.AUTO);
+  await photo.write(`./public/uploads/${req.body.photo}`);
+  // once we have written the photo to our filesystem
+  next();
 };
 
 exports.addProduct = async (req, res) => {
@@ -48,12 +48,20 @@ exports.getProduct = async (req, res) => {
 }
 
 exports.searchProducts = async (req, res) => {
-  console.log(req.body);
   const products = await Product.find({
     $text: {
       $search: req.body.term
     }
   })
-  .limit(10);
+    .limit(10);
   res.send(products);
+}
+
+exports.editProduct = async (req, res) => {
+  console.log(req.params.id);
+  console.log(req.body);
+  const editedProduct = await Product.findOneAndUpdate({ _id: req.params.id }, req.body, {
+    new: true
+  }).exec();
+  res.send(editedProduct);
 }

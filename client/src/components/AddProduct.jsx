@@ -92,10 +92,10 @@ class AddProduct extends Component {
   }
 
   render() {
-    const { handleSubmit, ifEditProduct } = this.props;
+    const { handleSubmit, ifEdit } = this.props;
     return (
       <form
-        onSubmit={ifEditProduct ?
+        onSubmit={ifEdit ?
           handleSubmit(this.handleEditForm) :
           handleSubmit(this.handleAddForm)}
         encType="multipart/form-data"
@@ -107,7 +107,7 @@ class AddProduct extends Component {
         <Field name="photo" type="file" component={this.renderDropField.bind(this)} />
         {this.renderAlert()}
         <button type="submit" className="btn btn-primary">
-          Add product
+          {ifEdit ? 'Update' : 'Add product'}
         </button>
       </form>
     );

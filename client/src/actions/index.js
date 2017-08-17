@@ -13,7 +13,7 @@ import {
   SEARCH_PRODUCTS,
   CART_ADD,
   CART_FETCH,
-  USER_GET
+  USER_GETpr
 } from '../actions/types';
 
 export const ROOT_URL = 'http://localhost:3002';
@@ -149,7 +149,11 @@ export function getUser(id) {
 
 export function editProduct(values, id) {
   return dispatch => {
-    axios.post(`${ROOT_URL}/editproduct/${id}`, values)
+    let data = new FormData();
+    Object.keys(values).forEach(key => {
+      data.append(key, values[key]);
+    });
+    axios.post(`${ROOT_URL}/editproduct/${id}`, data)
       .then(res => dispatch({ type: PRODUCTS_EDIT, payload: res.data }))
   }
 }

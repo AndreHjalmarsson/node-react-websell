@@ -12,7 +12,7 @@ const router = express.Router();
 const loginAuth = passport.authenticate('local', { session: false });
 const jwtAuth = passport.authenticate('jwt', { session: false });
 
-router.get('/', 
+router.get('/',
   authController.getIndex
 );
 
@@ -25,17 +25,17 @@ router.get('/getuser/:id',
   userController.getUser
 )
 
-router.post('/register', 
+router.post('/register',
   authController.validateRegistration,
   authController.register
 );
 
-router.post('/login', 
+router.post('/login',
   loginAuth,
   authController.login
 );
 
-router.post('/addproduct', 
+router.post('/addproduct',
   jwtAuth,
   productController.upload,
   productController.storeImage,
@@ -57,6 +57,12 @@ router.get('/getcart',
 );
 
 router.post('/searchproducts', productController.searchProducts);
+
+router.post('/editproduct/:id',
+  productController.upload,
+  productController.storeImage,
+  productController.editProduct
+);
 
 
 module.exports = router;
