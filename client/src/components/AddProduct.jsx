@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { reduxForm, Field } from "redux-form";
 import { connect } from "react-redux";
 import Dropzone from "react-dropzone";
+import { withRouter } from 'react-router-dom';
+
 import { PRODUCT_TYPES } from "../helpers";
 import * as actions from "../actions";
 
@@ -94,13 +96,16 @@ class AddProduct extends Component {
 
   renderDeleteButton() {
     return (
-      <button onClick={() => this.props.deleteProduct(this.props.id)}>
+      <button className="btn btn-danger"
+        onClick={() => this.props.deleteProduct(this.props.id)}
+      >
         Remove product
       </button>
     )
   }
 
   render() {
+    console.log(this.props.history);
     const { handleSubmit, ifEdit } = this.props;
     return (
       <form
@@ -135,7 +140,7 @@ function mapStateToProps(state) {
   };
 }
 
-export default reduxForm({
+export default withRouter(reduxForm({
   validate,
   form: "productForm"
-})(connect(mapStateToProps, actions)(AddProduct));
+})(connect(mapStateToProps, actions)(AddProduct)));

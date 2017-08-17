@@ -13,7 +13,7 @@ import {
   SEARCH_PRODUCTS,
   CART_ADD,
   CART_FETCH,
-  USER_GETpr
+  USER_GET
 } from '../actions/types';
 
 export const ROOT_URL = 'http://localhost:3002';
@@ -158,8 +158,9 @@ export function editProduct(values, id) {
   }
 }
 
-export function deleteProduct(id) {
+export function deleteProduct(id, callback) {
   return dispatch => {
     axios.post(`${ROOT_URL}/deleteproduct/${id}`);
+    callback();
   }
 }
