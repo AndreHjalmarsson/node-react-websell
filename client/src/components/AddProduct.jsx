@@ -87,17 +87,17 @@ class AddProduct extends Component {
   }
 
   handleAddForm(values) {
-    this.props.addProduct(values, () => this.props.history.push("/"));
+    this.props.addProduct(values, () => this.props.history.push('/'));
   }
 
   handleEditForm(values) {
-    this.props.editProduct(values, this.props.id);
+    this.props.editProduct(values, this.props.id, () => this.props.history.push(`/product/${this.props.id}`));
   }
 
   renderDeleteButton() {
     return (
       <button className="btn btn-danger"
-        onClick={() => this.props.deleteProduct(this.props.id)}
+        onClick={() => this.props.deleteProduct(this.props.id, () => this.props.history.push('/'))}
       >
         Remove product
       </button>
@@ -105,7 +105,6 @@ class AddProduct extends Component {
   }
 
   render() {
-    console.log(this.props.history);
     const { handleSubmit, ifEdit } = this.props;
     return (
       <form

@@ -141,13 +141,11 @@ export function searchProducts(term, type) {
 export function getUser(id) {
   return dispatch => {
     axios.get(`${ROOT_URL}/getuser/${id}`)
-      .then(res =>
-        dispatch({ type: USER_GET, payload: res.data })
-      )
+      .then(res => dispatch({ type: USER_GET, payload: res.data }))
   }
 }
 
-export function editProduct(values, id) {
+export function editProduct(values, id, callback) {
   return dispatch => {
     let data = new FormData();
     Object.keys(values).forEach(key => {
@@ -155,6 +153,7 @@ export function editProduct(values, id) {
     });
     axios.post(`${ROOT_URL}/editproduct/${id}`, data)
       .then(res => dispatch({ type: PRODUCTS_EDIT, payload: res.data }))
+    callback();
   }
 }
 
