@@ -10,6 +10,8 @@ class AddProduct extends Component {
     super(props);
 
     this.state = { files: [] };
+    this.handleAddForm = this.handleAddForm.bind(this)
+    this.handleEditForm = this.handleEditForm.bind(this)
   }
 
   renderField(field) {
@@ -81,16 +83,22 @@ class AddProduct extends Component {
     }
   }
 
-  handleProductForm(values) {
+  handleAddForm(values) {
     this.props.addProduct(values, () => this.props.history.push("/"));
   }
 
+  handleEditForm(values) {
+    console.log('hi');
+  }
+
   render() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit, editProduct } = this.props;
 
     return (
       <form
-        onSubmit={handleSubmit(this.handleProductForm.bind(this))}
+        onSubmit={editProduct ?
+          handleSubmit(this.handleEditForm) :
+          handleSubmit(this.handleAddForm)}
         encType="multipart/form-data"
       >
         <Field name="title" type="text" placeholder="Title" component={this.renderField} />

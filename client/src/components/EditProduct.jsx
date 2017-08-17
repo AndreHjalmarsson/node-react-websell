@@ -13,7 +13,7 @@ class EditProduct extends Component {
   renderProductForm() {
     const { title, description, price, type } = this.props.product;
     return (
-      <AddProduct title={title} description={description} price={price} type={type} />
+      <AddProduct title={title} description={description} price={price} type={type} editProduct={true} />
     );
   }
 
