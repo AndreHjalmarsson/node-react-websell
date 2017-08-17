@@ -8,6 +8,7 @@ import {
   ADD_PRODUCT,
   GET_MESSAGE,
   GET_PRODUCTS,
+  PRODUCTS_EDIT,
   GET_PRODUCT,
   SEARCH_PRODUCTS,
   CART_ADD,
@@ -146,8 +147,9 @@ export function getUser(id) {
   }
 }
 
-export function editProduct(values) {
+export function editProduct(values, id) {
   return dispatch => {
-    axios.post(`${ROOT_URL}/editproduct`)
+    axios.post(`${ROOT_URL}/editproduct/${id}`, values)
+      .then(res => dispatch({ type: PRODUCTS_EDIT, payload: res.data }))
   }
 }
