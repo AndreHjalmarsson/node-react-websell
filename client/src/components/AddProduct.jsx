@@ -10,8 +10,8 @@ class AddProduct extends Component {
     super(props);
 
     this.state = { files: [] };
-    this.handleAddForm = this.handleAddForm.bind(this)
-    this.handleEditForm = this.handleEditForm.bind(this)
+    this.handleAddForm = this.handleAddForm.bind(this);
+    this.handleEditForm = this.handleEditForm.bind(this);
   }
 
   renderField(field) {
@@ -88,15 +88,14 @@ class AddProduct extends Component {
   }
 
   handleEditForm(values) {
-    console.log('hi');
+    this.props.editProduct(values, this.props.id);
   }
 
   render() {
-    const { handleSubmit, editProduct } = this.props;
-
+    const { handleSubmit, ifEditProduct } = this.props;
     return (
       <form
-        onSubmit={editProduct ?
+        onSubmit={ifEditProduct ?
           handleSubmit(this.handleEditForm) :
           handleSubmit(this.handleAddForm)}
         encType="multipart/form-data"

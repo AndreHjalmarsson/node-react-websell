@@ -1,15 +1,15 @@
 import axios from 'axios';
 
-import { 
-  AUTH_USER, 
-  AUTH_ERROR, 
+import {
+  AUTH_USER,
+  AUTH_ERROR,
   UNAUTH_USER,
   AUTH_CURRENT,
-  ADD_PRODUCT, 
-  GET_MESSAGE, 
-  GET_PRODUCTS, 
+  ADD_PRODUCT,
+  GET_MESSAGE,
+  GET_PRODUCTS,
   GET_PRODUCT,
-  SEARCH_PRODUCTS, 
+  SEARCH_PRODUCTS,
   CART_ADD,
   CART_FETCH,
   USER_GET
@@ -26,7 +26,7 @@ function authError(error) {
 }
 
 export function registerUser(values, callback) {
-  return function(dispatch) {
+  return function (dispatch) {
     axios.post(`${ROOT_URL}/register`, values)
       .then(response => {
         // if request is accepted by the server we make a dispatch with proper action.type to
@@ -57,32 +57,30 @@ export function loginUser(values, callback) {
 
 export function getCurrentUser() {
   return dispatch => {
-    axios
-			.get(`${ROOT_URL}/currentuser`, {
-				headers: { authorization: localStorage.getItem('token') }
-			})
-			.then(response =>
-				dispatch({ type: AUTH_CURRENT, payload: response.data })
-			);
+    axios.get(`${ROOT_URL}/currentuser`, {
+      headers: { authorization: localStorage.getItem('token') }
+    })
+      .then(response =>
+        dispatch({ type: AUTH_CURRENT, payload: response.data })
+      );
   }
 }
 
 export function addProduct(values, callback) {
   return dispatch => {
-		let data = new FormData();
-		Object.keys(values).forEach(key => {
-			data.append(key, values[key]);
-		});
-		axios
-			.post(`${ROOT_URL}/addproduct`, data, {
-				headers: { authorization: localStorage.getItem('token') }
-			})
-			.then(response => {
+    let data = new FormData();
+    Object.keys(values).forEach(key => {
+      data.append(key, values[key]);
+    });
+    axios.post(`${ROOT_URL}/addproduct`, data, {
+      headers: { authorization: localStorage.getItem('token') }
+    })
+      .then(response => {
         dispatch({ type: ADD_PRODUCT, payload: response.data.message });
         callback();
-			})
-			.catch(() => dispatch(authError('Could not add product to store')));
-	};
+      })
+      .catch(() => dispatch(authError('Could not add product to store')));
+  };
 }
 
 export function logoutUser() {
@@ -134,7 +132,7 @@ export function fetchCart() {
 
 export function searchProducts(term, type) {
   return dispatch => {
-    axios.post(`${ROOT_URL}/searchproducts`, {term, type})
+    axios.post(`${ROOT_URL}/searchproducts`, { term, type })
       .then(response => dispatch({ type: SEARCH_PRODUCTS, payload: response.data }))
   }
 }
@@ -142,8 +140,14 @@ export function searchProducts(term, type) {
 export function getUser(id) {
   return dispatch => {
     axios.get(`${ROOT_URL}/getuser/${id}`)
-      .then(res => 
+      .then(res =>
         dispatch({ type: USER_GET, payload: res.data })
       )
+  }
+}
+
+export function editProduct(values) {
+  return dispatch => {
+    axios.post(`${ROOT_URL}/editproduct`)
   }
 }

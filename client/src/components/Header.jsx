@@ -15,13 +15,12 @@ class Header extends Component {
     if (authed && this.props.currentUser) {
       return (
         <div>
-          {this.props.children}
           <li className="nav-item pull-xs-right">
             <Link to="/logout" className="nav-link">Logout</Link>
           </li>
-           <li className="nav-item pull-xs-right">
+          <li className="nav-item pull-xs-right">
             <Link to={`/user/${this.props.currentUser._id}`} className="nav-link">Profle</Link>
-          </li> 
+          </li>
           <li className="nav-item">
             <Link to="/addproduct" className="nav-link">Sell</Link>
           </li>
@@ -37,7 +36,7 @@ class Header extends Component {
             <Link to="/login" className="nav-link">Login</Link>
           </li>
           <li className="nav-item">
-          <Link to="/register" className="nav-link">Register</Link>
+            <Link to="/register" className="nav-link">Register</Link>
           </li>
         </div>
       );
