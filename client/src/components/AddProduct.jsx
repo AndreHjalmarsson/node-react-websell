@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom';
 
 import { PRODUCT_TYPES } from "../helpers";
 import * as actions from "../actions";
+import { ROOT_URL } from "../actions/index.js";
 
 class AddProduct extends Component {
   constructor(props) {
@@ -65,10 +66,14 @@ class AddProduct extends Component {
             return field.input.onChange(filesToUpload[0]);
           }}>
           <div>
-            {/* If a file is uploaded show the preview  */}
-            {field.input.value ?
-              <img width="195" height="195" src={this.state.files.map(file => file.preview)} alt="" />
-              : "Add an image"}
+            {/* If in edit mode we have access to this.props.photo and we'll display the current photo. Else we
+            check if the user have chosen a photo for the new product and display preview, else just text */}
+            {this.props.photo ?
+              <img width="195" height="195" src={`${ROOT_URL}/uploads/${this.props.photo}`} alt="" />
+              : field.input.value ?
+                <img width="195" height="195" src={this.state.files.map(file => file.preview)} alt="" />
+                : "Add an image"
+            }
           </div>
         </Dropzone>
       </div>

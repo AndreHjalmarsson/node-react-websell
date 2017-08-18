@@ -11,9 +11,18 @@ class EditProduct extends Component {
   }
 
   renderProductForm() {
-    const { _id, title, description, price, type } = this.props.product;
+    const { _id, title, description, price, type, photo } = this.props.product;
+
+    let initialValues = {
+      initialValues: {
+        title,
+        description,
+        type,
+        price
+      }
+    };
     return (
-      <AddProduct id={_id} title={title} description={description} price={price} type={type} ifEdit={true} />
+      <AddProduct id={_id} {...initialValues} photo={photo} ifEdit={true} />
     );
   }
 
@@ -36,10 +45,3 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, actions)(EditProduct);
-
-// export default reduxForm({
-//   validate,
-//   form: 'editProductForm'
-// })(
-//   connect(mapStateToProps, actions)(EditProduct)
-//   );
