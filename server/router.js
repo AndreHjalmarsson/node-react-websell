@@ -7,35 +7,27 @@ const productController = require('./Controllers/productController');
 const cartController = require('./Controllers/cartController');
 const userController = require('./Controllers/userController');
 
-// Passport local strategy works as login middleware.
 const router = express.Router();
+// Passport local strategy works as login middleware.
 const loginAuth = passport.authenticate('local', { session: false });
 const jwtAuth = passport.authenticate('jwt', { session: false });
 
-router.get('/',
-  authController.getIndex
-);
+router.get('/', authController.getIndex);
 
-router.get('/currentuser',
-  jwtAuth,
-  userController.currentUser
-)
+router.get('/currentuser', jwtAuth, userController.currentUser);
 
-router.get('/getuser/:id',
-  userController.getUser
-)
+router.get('/getuser/:id', userController.getUser);
 
-router.post('/register',
+router.post(
+  '/register',
   authController.validateRegistration,
   authController.register
 );
 
-router.post('/login',
-  loginAuth,
-  authController.login
-);
+router.post('/login', loginAuth, authController.login);
 
-router.post('/addproduct',
+router.post(
+  '/addproduct',
   jwtAuth,
   productController.upload,
   productController.storeImage,
@@ -46,19 +38,14 @@ router.get('/getproducts', productController.getProducts);
 
 router.get('/getproduct/:id', productController.getProduct);
 
-router.post('/addtocart/:id',
-  jwtAuth,
-  cartController.addToCart
-);
+router.post('/addtocart/:id', jwtAuth, cartController.addToCart);
 
-router.get('/getcart',
-  jwtAuth,
-  cartController.getCart
-);
+router.get('/getcart', jwtAuth, cartController.getCart);
 
 router.post('/searchproducts', productController.searchProducts);
 
-router.post('/editproduct/:id',
+router.post(
+  '/editproduct/:id',
   productController.upload,
   productController.storeImage,
   productController.editProduct

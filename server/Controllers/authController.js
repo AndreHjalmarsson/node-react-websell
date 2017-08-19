@@ -1,6 +1,6 @@
-const User = require('../Models/UserModel');
-const jwt = require('jwt-simple');
-const promisify = require('es6-promisify');
+const User = require("../Models/UserModel");
+const jwt = require("jwt-simple");
+const promisify = require("es6-promisify");
 
 // Function to create and send a jwt token. Used as end middleware when signing up
 // and also signing in.
@@ -10,23 +10,27 @@ function setJwtToken(user) {
 }
 
 exports.getIndex = (req, res, next) => {
-  res.send({ secret: 'message' });
+  res.send({ secret: "message" });
 };
 
-// Various validation to validate the new user info. These methods are available since we added 
+// Various validation to validate the new user info. These methods are available since we added
 // expressValidator to our index.js file.
 exports.validateRegistration = (req, res, next) => {
-  req.sanitizeBody('name');
-  req.checkBody('name', 'You must provide a name').notEmpty();
-  req.checkBody('email', 'You must provide a valid email').isEmail();
-  req.sanitizeBody('email').normalizeEmail({
+  req.sanitizeBody("name");
+  req.checkBody("name", "You must provide a name").notEmpty();
+  req.checkBody("email", "You must provide a valid email").isEmail();
+  req.sanitizeBody("email").normalizeEmail({
     gmail_remove_dots: false,
     remove_extension: false,
     gmail_remove_subaddress: false
   });
-  req.checkBody('password', 'You must provide a password').notEmpty();
-  req.checkBody('passwordConfirm', 'You must provide a confirmation password').notEmpty();
-  req.checkBody('passwordConfirm', 'Passwords do not match').equals(req.body.password);
+  req.checkBody("password", "You must provide a password").notEmpty();
+  req
+    .checkBody("passwordConfirm", "You must provide a confirmation password")
+    .notEmpty();
+  req
+    .checkBody("passwordConfirm", "Passwords do not match")
+    .equals(req.body.password);
 
   // If any error occured above, function below will fire off
   const errors = req.validationErrors();
@@ -34,7 +38,7 @@ exports.validateRegistration = (req, res, next) => {
     res.status(422).send({ error: errors.map(err => err.msg) });
     //sending error and returning from function
     return;
-  };
+  }
   //If all went well we proceed to register the user
   next();
 };
@@ -43,13 +47,13 @@ exports.register = async (req, res, next) => {
   //checking if registration email is already in the databse
   const emailExists = await User.findOne({ email: req.body.email });
   //if email exists we send an error
-  if(emailExists) {
-    res.status(422).send({ error: 'Email is already in use' });
+  if (emailExists) {
+    res.status(422).send({ error: "Email is already in use" });
   }
   // Register the user
   const user = new User({ email: req.body.email, name: req.body.name });
   // In order to store the password in the databse we must use the register method that
-  //lives on our User object (User.register). This method comes from the passportLocalMongoose 
+  //lives on our User object (User.register). This method comes from the passportLocalMongoose
   //plugin that we added in the UserModel. But first we must promisify the method in order to use await.
   const promisifiedRegister = promisify(User.register, User);
   // After we have promisified the User.register method we await it and the user will be saved to
@@ -65,5 +69,4 @@ exports.login = (req, res) => {
   // we provide the user with a jwt.
   const token = setJwtToken(req.user);
   res.send({ token });
-  
 };

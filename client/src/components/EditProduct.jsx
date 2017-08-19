@@ -5,7 +5,6 @@ import * as actions from '../actions';
 import AddProduct from './AddProduct';
 
 class EditProduct extends Component {
-
   componentDidMount() {
     this.props.getProduct(this.props.match.params.id);
   }
@@ -31,7 +30,9 @@ class EditProduct extends Component {
       <div>
         Edit Product
         <div>
-          {this.props.product ? this.renderProductForm() : 'No such product found...'}
+          {this.props.product
+            ? this.renderProductForm()
+            : 'No such product found...'}
         </div>
       </div>
     );
@@ -41,7 +42,7 @@ class EditProduct extends Component {
 function mapStateToProps(state) {
   return {
     product: state.product.singleProduct
-  }
+  };
 }
 
 export default connect(mapStateToProps, actions)(EditProduct);
