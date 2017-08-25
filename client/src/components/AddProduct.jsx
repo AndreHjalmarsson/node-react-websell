@@ -132,11 +132,11 @@ class AddProduct extends Component {
   }
 
   render() {
-    const { handleSubmit, ifEdit } = this.props;
+    const { handleSubmit, edit } = this.props;
     return (
       <form
         onSubmit={
-          ifEdit
+          edit
             ? handleSubmit(this.handleEditForm)
             : handleSubmit(this.handleAddForm)
         }
@@ -168,9 +168,9 @@ class AddProduct extends Component {
         />
         {this.renderAlert()}
         <button type="submit" className="btn btn-primary">
-          {ifEdit ? 'Update' : 'Add product'}
+          {edit ? 'Update' : 'Add product'}
         </button>
-        {ifEdit && this.renderDeleteButton()}
+        {edit && this.renderDeleteButton()}
       </form>
     );
   }

@@ -20,9 +20,7 @@ class EditProduct extends Component {
         price
       }
     };
-    return (
-      <AddProduct id={_id} {...initialValues} photo={photo} ifEdit={true} />
-    );
+    return <AddProduct id={_id} {...initialValues} photo={photo} edit={true} />;
   }
 
   render() {
