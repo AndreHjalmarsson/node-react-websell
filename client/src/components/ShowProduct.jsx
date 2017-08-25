@@ -11,7 +11,11 @@ class ShowProduct extends Component {
     return (
       <div>
         Single product
-        <div>{this.props.product ? this.props.product.title : null}</div>
+        <div>
+          {this.props.product
+            ? this.props.product.title && this.props.product.id
+            : null}
+        </div>
       </div>
     );
   }
