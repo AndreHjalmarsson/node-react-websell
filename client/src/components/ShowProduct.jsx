@@ -7,15 +7,20 @@ class ShowProduct extends Component {
     this.props.getProduct(this.props.match.params.id);
   }
 
+  renderProduct() {
+    return (
+      <div>
+        {this.props.product.title}
+        {this.props.product.photo}
+      </div>
+    );
+  }
+
   render() {
     return (
       <div>
         Single product
-        <div>
-          {this.props.product
-            ? this.props.product.title && this.props.product.id
-            : null}
-        </div>
+        {this.props.product ? this.renderProduct() : null}
       </div>
     );
   }
