@@ -1,26 +1,26 @@
-const Product = require("../Models/ProductModel");
-const multer = require("multer");
-const jimp = require("jimp");
-const uuid = require("uuid");
+const Product = require('../Models/ProductModel');
+const multer = require('multer');
+const jimp = require('jimp');
+const uuid = require('uuid');
 
 const multerOptions = {
   storage: multer.memoryStorage(),
   fileFilter(req, file, next) {
-    const isPhoto = file.mimetype.startsWith("image/");
+    const isPhoto = file.mimetype.startsWith('image/');
     isPhoto
       ? next(null, true)
-      : next({ message: "Filetype not allowed" }, false);
+      : next({ message: 'Filetype not allowed' }, false);
   }
 };
 
-exports.upload = multer(multerOptions).single("photo");
+exports.upload = multer(multerOptions).single('photo');
 
 exports.storeImage = async (req, res, next) => {
   if (!req.file) {
     next(); // skip to the next middleware
     return;
   }
-  const extension = req.file.mimetype.split("/")[1];
+  const extension = req.file.mimetype.split('/')[1];
   req.body.photo = `${uuid.v4()}.${extension}`;
   // now we resize
   const photo = await jimp.read(req.file.buffer);
@@ -34,7 +34,7 @@ exports.addProduct = async (req, res) => {
   req.body.seller = req.user.id;
   const product = new Product(req.body);
   await product.save();
-  res.send({ message: "Added product" });
+  res.send({ message: 'Added product' });
 };
 
 exports.getProducts = async (req, res) => {
@@ -50,7 +50,9 @@ exports.getProduct = async (req, res) => {
 };
 
 exports.searchProducts = async (req, res) => {
+  console.log(req.body);
   const products = await Product.find({
+    type: body.type,
     $text: {
       $search: req.body.term
     }
@@ -71,5 +73,5 @@ exports.editProduct = async (req, res) => {
 
 exports.deleteProduct = async (req, res) => {
   await Product.findOneAndRemove({ _id: req.params.id });
-  res.send({ message: "item removed" });
+  res.send({ message: 'item removed' });
 };

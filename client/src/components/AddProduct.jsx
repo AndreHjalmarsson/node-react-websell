@@ -55,6 +55,9 @@ class AddProduct extends Component {
             </option>
           )}
         </select>
+        <div className="error">
+          {touched ? error : ''}
+        </div>
       </div>
     );
   }
@@ -178,6 +181,12 @@ class AddProduct extends Component {
 
 function validate(values) {
   const errors = {};
+  !values.title ? (errors.title = 'Must provide a product title') : '';
+  !values.description
+    ? (errors.description = 'Must provide a product description')
+    : '';
+  !values.type ? (errors.type = 'Must provide a product type') : '';
+  !values.price ? (errors.price = 'Must provide a product price') : '';
   return errors;
 }
 
