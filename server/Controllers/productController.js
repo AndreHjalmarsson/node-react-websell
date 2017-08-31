@@ -52,9 +52,8 @@ exports.getProduct = async (req, res) => {
 exports.searchProducts = async (req, res) => {
   console.log(req.body);
   const products = await Product.find({
-    type: body.type,
     $text: {
-      $search: req.body.term
+      $search: `${req.body.type} ${req.body.term}`
     }
   }).limit(10);
   res.send(products);
