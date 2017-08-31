@@ -6,14 +6,17 @@ const productSchema = new mongoose.Schema({
   type: String,
   price: Number,
   created: { type: Date, default: Date.now },
-  seller: { type: mongoose.Schema.ObjectId, ref: 'User', required: 'Must provide a seller' },
+  seller: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'User',
+    required: 'Must provide a seller'
+  },
   photo: String
 });
 
 productSchema.index({
-	title: 'text',
-  description: 'text',
-  type: 'text'
+  title: 'text',
+  description: 'text'
 });
 
 // A function to populate the seller field with all the fields that it refenrences, in this case being the UserModel
