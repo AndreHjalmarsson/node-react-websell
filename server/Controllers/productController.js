@@ -52,14 +52,17 @@ exports.getProduct = async (req, res) => {
 exports.searchProducts = async (req, res) => {
   console.log(req.body);
   const products = await Product.find({
-    $and: [
-      {
-        $text: {
-          $search: req.body.term
-        }
-      },
-      { type: { $eq: req.body.type } }
-    ]
+    $text: {
+      $search: req.body.term
+    }
+    // $and: [
+    //   {
+    //     $text: {
+    //       $search: req.body.term
+    //     }
+    //   },
+    //   { type: { $eq: req.body.type } }
+    // ]
   }).limit(10);
   res.send(products);
 };
