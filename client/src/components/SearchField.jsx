@@ -10,6 +10,10 @@ class SearchField extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
+  componentWillMount() {
+    this.props.searchProducts('', '');
+  }
+
   handleChange() {
     this.props.searchProducts(this.searchInput.value, this.searchSelect.value);
   }
@@ -27,11 +31,7 @@ class SearchField extends Component {
           ref={select => (this.searchSelect = select)}
         >
           <option value="">Category</option>
-          {PRODUCT_TYPES.map(type =>
-            <option key={type}>
-              {type}
-            </option>
-          )}
+          {PRODUCT_TYPES.map(type => <option key={type}>{type}</option>)}
         </select>
       </div>
     );
