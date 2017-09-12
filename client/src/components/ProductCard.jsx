@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import ReactCardFlip from "react-card-flip";
-import { connect } from "react-redux";
-import * as actions from "../actions";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import ReactCardFlip from 'react-card-flip';
+import { connect } from 'react-redux';
+import * as actions from '../actions';
 
-import { ROOT_URL } from "../actions/index.js";
+import { ROOT_URL } from '../actions/index.js';
 
 const CardWrapper = styled.div`
   margin-bottom: 320px !important;
@@ -71,22 +71,18 @@ class ProductCard extends Component {
     const { authed, updatedCart, productsInCart, id } = this.props;
     if (authed) {
       if (updatedCart) {
-        return updatedCart.includes(id) ? "Remove" : "Buy";
+        return updatedCart.includes(id) ? 'Remove' : 'Buy';
       } else {
         const productIds = productsInCart.map(product => product._id);
-        return productIds.includes(id) ? "Remove" : "Buy";
+        return productIds.includes(id) ? 'Remove' : 'Buy';
       }
     } else {
-      return "Buy";
+      return 'Buy';
     }
   }
 
   renderEdit() {
-    return (
-      <Link to={`/product/edit/${this.props.id}`}>
-        Edit
-      </Link>
-    );
+    return <Link to={`/product/edit/${this.props.id}`}>Edit</Link>;
   }
 
   render() {
@@ -96,14 +92,20 @@ class ProductCard extends Component {
           <Front key="front">
             <UpperFront onClick={this.handleClick}>
               <ImgWrapper>
-                <Img src={`${ROOT_URL}/uploads/${this.props.photo}`} alt={this.props.photo} />
+                <Img
+                  src={`${ROOT_URL}/uploads/${this.props.photo}`}
+                  alt={this.props.photo}
+                />
               </ImgWrapper>
-              <Link to={`/product/${this.props.id}`}>
-                {this.props.title}
-              </Link>
+              <Link to={`/product/${this.props.id}`}>{this.props.title}</Link>
             </UpperFront>
-            {this.props.currentUser === this.props.seller._id ? this.renderEdit() : null}
-            <button onClick={this.handleSubmit} className="btn btn-primary pull-xs-right">
+            {this.props.currentUser === this.props.seller._id ? (
+              this.renderEdit()
+            ) : null}
+            <button
+              onClick={this.handleSubmit}
+              className="btn btn-primary pull-xs-right"
+            >
               {this.props.productsInCart && this.renderButtonText()}
             </button>
           </Front>
@@ -124,7 +126,7 @@ function mapStateToProps(state) {
   return {
     updatedCart: state.cart.updateCart,
     productsInCart: state.cart.productsInCart,
-    authed: state.auth.authed,
+    authed: state.auth.authed
   };
 }
 
