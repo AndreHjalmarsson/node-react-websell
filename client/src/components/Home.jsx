@@ -11,10 +11,6 @@ class Home extends Component {
     this.props.authed && this.props.getCurrentUser();
   }
 
-  componentWillReceiveProps(nextProps) {
-    console.log(nextProps.match);
-  }
-
   allProductsList() {
     return this.props.products.map(product => {
       const {
@@ -84,9 +80,11 @@ class Home extends Component {
         Home
         <SearchField />
         <div className="row">
-          {searchItems && currentUser && searchItems.length
-            ? this.searchProductsList()
-            : products && currentUser && this.allProductsList()}
+          {searchItems && currentUser && searchItems.length ? (
+            this.searchProductsList()
+          ) : (
+            products && currentUser && this.allProductsList()
+          )}
         </div>
       </div>
     );
