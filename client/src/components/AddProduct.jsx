@@ -23,18 +23,14 @@ class AddProduct extends Component {
     const classname = `form-group ${touched && error ? 'has-danger' : ''}`;
     return (
       <div className={classname}>
-        <label>
-          {label}
-        </label>
+        <label>{label}</label>
         <input
           className="form-control"
           type={type}
           placeholder={placeholder}
           {...input}
         />
-        <div className="error">
-          {touched ? error : ''}
-        </div>
+        <div className="error">{touched ? error : ''}</div>
       </div>
     );
   }
@@ -44,20 +40,16 @@ class AddProduct extends Component {
     const classname = `form-group ${touched && error ? 'has-danger' : ''}`;
     return (
       <div className={classname}>
-        <label>
-          {label}
-        </label>
+        <label>{label}</label>
         <select className="form-control" {...input}>
           <option />
-          {PRODUCT_TYPES.map(type =>
+          {PRODUCT_TYPES.map(type => (
             <option key={type} value={type}>
               {type}
             </option>
-          )}
+          ))}
         </select>
-        <div className="error">
-          {touched ? error : ''}
-        </div>
+        <div className="error">{touched ? error : ''}</div>
       </div>
     );
   }
@@ -78,21 +70,23 @@ class AddProduct extends Component {
           <div>
             {/* If in edit mode we have access to this.props.photo and we'll display the current photo. Else we
             check if the user have chosen a photo for the new product and display preview, else just text */}
-            {this.props.photo
-              ? <img
-                  width="195"
-                  height="195"
-                  src={`${ROOT_URL}/uploads/${this.props.photo}`}
-                  alt=""
-                />
-              : field.input.value
-                ? <img
-                    width="195"
-                    height="195"
-                    src={this.state.files.map(file => file.preview)}
-                    alt=""
-                  />
-                : 'Add an image'}
+            {this.props.photo ? (
+              <img
+                width="195"
+                height="195"
+                src={`${ROOT_URL}/uploads/${this.props.photo}`}
+                alt=""
+              />
+            ) : field.input.value ? (
+              <img
+                width="195"
+                height="195"
+                src={this.state.files.map(file => file.preview)}
+                alt=""
+              />
+            ) : (
+              'Add an image'
+            )}
           </div>
         </Dropzone>
       </div>
@@ -139,9 +133,11 @@ class AddProduct extends Component {
     return (
       <form
         onSubmit={
-          edit
-            ? handleSubmit(this.handleEditForm)
-            : handleSubmit(this.handleAddForm)
+          edit ? (
+            handleSubmit(this.handleEditForm)
+          ) : (
+            handleSubmit(this.handleAddForm)
+          )
         }
         encType="multipart/form-data"
       >
