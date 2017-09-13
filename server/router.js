@@ -6,6 +6,7 @@ const authController = require('./Controllers/authController');
 const productController = require('./Controllers/productController');
 const cartController = require('./Controllers/cartController');
 const userController = require('./Controllers/userController');
+const commentController = require('./Controllers/commentController');
 
 const router = express.Router();
 // Passport local strategy works as login middleware.
@@ -33,6 +34,8 @@ router.post(
   productController.storeImage,
   productController.addProduct
 );
+
+router.post('/addcomment', jwtAuth, commentController.addComment);
 
 router.get('/getproducts', productController.getProducts);
 
