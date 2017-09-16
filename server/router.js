@@ -35,8 +35,6 @@ router.post(
   productController.addProduct
 );
 
-router.post('/addcomment', jwtAuth, commentController.addComment);
-
 router.get('/getproducts', productController.getProducts);
 
 router.get('/getproduct/:id', productController.getProduct);
