@@ -9,6 +9,7 @@ class Home extends Component {
   componentDidMount() {
     this.props.getProducts();
     this.props.authed && this.props.getCurrentUser();
+    this.props.authed && this.props.getCurrentUser();
   }
 
   allProductsList() {
