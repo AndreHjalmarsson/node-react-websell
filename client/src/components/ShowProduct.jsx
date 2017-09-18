@@ -35,8 +35,7 @@ class ShowProduct extends Component {
 
   handleCommentForm(event) {
     event.preventDefault();
-    console.log(this.textInput.value);
-    console.log(this.props.match.params.id);
+    this.props.addComment(this.textInput.value, this.props.match.params.id);
   }
 
   render() {

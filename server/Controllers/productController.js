@@ -50,7 +50,7 @@ exports.getProduct = async (req, res) => {
 };
 
 exports.searchProducts = async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   const products = await Product.find({
     $text: {
       $search: req.body.term
