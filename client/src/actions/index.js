@@ -23,12 +23,13 @@ function authError(error) {
   return {
     type: AUTH_ERROR,
     payload: error
-  }
+  };
 }
 
 export function registerUser(values, callback) {
-  return function (dispatch) {
-    axios.post(`${ROOT_URL}/register`, values)
+  return function(dispatch) {
+    axios
+      .post(`${ROOT_URL}/register`, values)
       .then(response => {
         // if request is accepted by the server we make a dispatch with proper action.type to
         // make the user authenticated in our application state
@@ -37,34 +38,36 @@ export function registerUser(values, callback) {
         localStorage.setItem('token', response.data.token);
         callback();
       })
-      //on the server side we validate registration info and if error are found we return 
-      // an error status code together with a proper error message from the server which 
+      //on the server side we validate registration info and if error are found we return
+      // an error status code together with a proper error message from the server which
       // will put the user in this catch function. authError uses the AUTH_ERROR action.type
       .catch(error => dispatch(authError(error.response.data.error)));
-  }
+  };
 }
 
 export function loginUser(values, callback) {
   return dispatch => {
-    axios.post(`${ROOT_URL}/login`, values)
+    axios
+      .post(`${ROOT_URL}/login`, values)
       .then(response => {
         dispatch({ type: AUTH_USER });
         localStorage.setItem('token', response.data.token);
         callback();
       })
       .catch(() => dispatch(authError('Bad Login')));
-  }
+  };
 }
 
 export function getCurrentUser() {
   return dispatch => {
-    axios.get(`${ROOT_URL}/currentuser`, {
-      headers: { authorization: localStorage.getItem('token') }
-    })
+    axios
+      .get(`${ROOT_URL}/currentuser`, {
+        headers: { authorization: localStorage.getItem('token') }
+      })
       .then(response =>
         dispatch({ type: AUTH_CURRENT, payload: response.data })
       );
-  }
+  };
 }
 
 export function addProduct(values, callback) {
@@ -73,9 +76,10 @@ export function addProduct(values, callback) {
     Object.keys(values).forEach(key => {
       data.append(key, values[key]);
     });
-    axios.post(`${ROOT_URL}/addproduct`, data, {
-      headers: { authorization: localStorage.getItem('token') }
-    })
+    axios
+      .post(`${ROOT_URL}/addproduct`, data, {
+        headers: { authorization: localStorage.getItem('token') }
+      })
       .then(response => {
         dispatch({ type: ADD_PRODUCT, payload: response.data.message });
         callback();
@@ -88,61 +92,69 @@ export function logoutUser() {
   return dispatch => {
     dispatch({ type: UNAUTH_USER });
     localStorage.removeItem('token');
-  }
+  };
 }
 
 export function getProducts() {
   return dispatch => {
-    axios.get(`${ROOT_URL}/getproducts`)
+    axios
+      .get(`${ROOT_URL}/getproducts`)
       .then(response => {
-        dispatch({ type: GET_PRODUCTS, payload: response.data })
+        dispatch({ type: GET_PRODUCTS, payload: response.data });
       })
       .catch(() => dispatch(authError('no products found')));
-  }
+  };
 }
 
 export function getProduct(id) {
   return dispatch => {
-    axios.get(`${ROOT_URL}/getproduct/${id}`)
+    axios
+      .get(`${ROOT_URL}/getproduct/${id}`)
       .then(response => {
-        dispatch({ type: GET_PRODUCT, payload: response.data })
+        dispatch({ type: GET_PRODUCT, payload: response.data });
       })
       .catch(() => dispatch(authError('No product found')));
-  }
+  };
 }
 
 export function addToCart(productId) {
   return dispatch => {
-    axios.post(`${ROOT_URL}/addtocart/${productId}`, null, {
-      headers: { authorization: localStorage.getItem('token') }
-    })
+    axios
+      .post(`${ROOT_URL}/addtocart/${productId}`, null, {
+        headers: { authorization: localStorage.getItem('token') }
+      })
       .then(response => {
         dispatch({ type: CART_ADD, payload: response.data });
-      })
-  }
+      });
+  };
 }
 
 export function fetchCart() {
   return dispatch => {
-    axios.get(`${ROOT_URL}/getcart`, {
-      headers: { authorization: localStorage.getItem('token') }
-    })
-      .then(response => dispatch({ type: CART_FETCH, payload: response.data }))
-  }
+    axios
+      .get(`${ROOT_URL}/getcart`, {
+        headers: { authorization: localStorage.getItem('token') }
+      })
+      .then(response => dispatch({ type: CART_FETCH, payload: response.data }));
+  };
 }
 
 export function searchProducts(term, type) {
   return dispatch => {
-    axios.post(`${ROOT_URL}/searchproducts`, { term, type })
-      .then(response => dispatch({ type: SEARCH_PRODUCTS, payload: response.data }))
-  }
+    axios
+      .post(`${ROOT_URL}/searchproducts`, { term, type })
+      .then(response =>
+        dispatch({ type: SEARCH_PRODUCTS, payload: response.data })
+      );
+  };
 }
 
 export function getUser(id) {
   return dispatch => {
-    axios.get(`${ROOT_URL}/getuser/${id}`)
-      .then(res => dispatch({ type: USER_GET, payload: res.data }))
-  }
+    axios
+      .get(`${ROOT_URL}/getuser/${id}`)
+      .then(res => dispatch({ type: USER_GET, payload: res.data }));
+  };
 }
 
 export function editProduct(values, id, callback) {
@@ -151,15 +163,28 @@ export function editProduct(values, id, callback) {
     Object.keys(values).forEach(key => {
       data.append(key, values[key]);
     });
-    axios.post(`${ROOT_URL}/editproduct/${id}`, data)
-      .then(res => dispatch({ type: PRODUCTS_EDIT, payload: res.data }))
+    axios
+      .post(`${ROOT_URL}/editproduct/${id}`, data)
+      .then(res => dispatch({ type: PRODUCTS_EDIT, payload: res.data }));
     callback();
-  }
+  };
 }
 
 export function deleteProduct(id, callback) {
   return dispatch => {
     axios.post(`${ROOT_URL}/deleteproduct/${id}`);
     callback();
-  }
+  };
+}
+
+export function addComment(content, productId) {
+  return dispatch => {
+    axios.post(
+      `${ROOT_URL}/`,
+      { content, productId },
+      {
+        headers: { authorization: localStorage.getItem('token') }
+      }
+    );
+  };
 }
