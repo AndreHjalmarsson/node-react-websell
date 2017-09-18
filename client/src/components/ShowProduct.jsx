@@ -5,6 +5,10 @@ import * as actions from '../actions';
 import Comment from './Comment';
 
 class ShowProduct extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   componentWillMount() {
     this.props.getProduct(this.props.match.params.id);
   }
@@ -32,6 +36,7 @@ class ShowProduct extends Component {
   handleCommentForm(event) {
     event.preventDefault();
     console.log(this.textInput.value);
+    console.log(this.props.match.params.id);
   }
 
   render() {
