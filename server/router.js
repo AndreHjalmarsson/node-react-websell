@@ -54,4 +54,6 @@ router.post(
 
 router.post('/deleteproduct/:id', productController.deleteProduct);
 
+router.post('/addcomment', jwtAuth, commentController.addComment);
+
 module.exports = router;
