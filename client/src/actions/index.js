@@ -180,7 +180,7 @@ export function deleteProduct(id, callback) {
 export function addComment(content, productId) {
   return dispatch => {
     axios.post(
-      `${ROOT_URL}/`,
+      `${ROOT_URL}/addcomment`,
       { content, productId },
       {
         headers: { authorization: localStorage.getItem('token') }
