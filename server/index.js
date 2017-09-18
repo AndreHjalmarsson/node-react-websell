@@ -17,7 +17,7 @@ require('dotenv').config({ path: 'variables.env' });
 //Connecting to MongoDB
 mongoose.connect(process.env.DATABASE);
 mongoose.connection.on('error', error => {
-  console.log(`Database connection failed error: ${error.message}`);
+  console.log(`Database connection failed: ${error.message}`);
 });
 
 //Initialising the app

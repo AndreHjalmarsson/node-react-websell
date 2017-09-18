@@ -18,13 +18,30 @@ class ShowProduct extends Component {
     );
   }
 
+  renderCommentForm() {
+    return (
+      <div>
+        <form onSubmit={this.handleCommentForm.bind(this)}>
+          <input type="text" ref={input => (this.textInput = input)} />
+          <button type="submit">Post</button>
+        </form>
+      </div>
+    );
+  }
+
+  handleCommentForm(event) {
+    event.preventDefault();
+    console.log(this.textInput.value);
+  }
+
   render() {
     return (
       <div>
         Single product
         {this.props.product ? this.renderProduct() : null}
         <div>
-          <Comment />
+          {this.renderCommentForm()}
+          {/* <Comment /> */}
         </div>
       </div>
     );
