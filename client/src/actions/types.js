@@ -11,3 +11,4 @@ export const CART_FETCH = 'cart_fetch';
 export const SEARCH_PRODUCTS = 'search_products';
 export const USER_GET = 'user_get';
 export const PRODUCTS_EDIT = 'products_edit';
+export const COMMENTS_GET = 'comments_get';

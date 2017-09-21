@@ -13,7 +13,8 @@ import {
   SEARCH_PRODUCTS,
   CART_ADD,
   CART_FETCH,
-  USER_GET
+  USER_GET,
+  COMMENTS_GET
 } from '../actions/types';
 
 export const ROOT_URL = 'http://localhost:3002';
@@ -191,6 +192,8 @@ export function addComment(content, productId) {
 
 export function getComments(productId) {
   return dispatch => {
-    axios.get(`${ROOT_URL}/getcomments/${productId}`);
+    axios
+      .get(`${ROOT_URL}/getcomments/${productId}`)
+      .then(res => dispatch({ type: COMMENTS_GET, payload: res.data }));
   };
 }
