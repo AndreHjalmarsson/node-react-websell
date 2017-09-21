@@ -46,6 +46,7 @@ class ShowProduct extends Component {
         {this.props.product ? this.renderProduct() : null}
         <div>
           {this.renderCommentForm()}
+          {this.props.comments ? console.log(this.props.comments) : null}
           {/* <Comment /> */}
         </div>
       </div>
@@ -55,7 +56,8 @@ class ShowProduct extends Component {
 
 function mapStateToProps(state) {
   return {
-    product: state.product.singleProduct
+    product: state.product.singleProduct,
+    comments: state.comment.comments
   };
 }
 
