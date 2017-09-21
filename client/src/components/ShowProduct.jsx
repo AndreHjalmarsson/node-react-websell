@@ -11,6 +11,7 @@ class ShowProduct extends Component {
 
   componentWillMount() {
     this.props.getProduct(this.props.match.params.id);
+    this.props.getComments(this.props.match.params.id);
   }
 
   renderProduct() {
