@@ -188,3 +188,9 @@ export function addComment(content, productId) {
     );
   };
 }
+
+export function getComments(productId) {
+  return dispatch => {
+    axios.get(`${ROOT_URL}/getcomments/${productId}`);
+  };
+}
