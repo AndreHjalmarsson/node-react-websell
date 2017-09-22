@@ -44,11 +44,8 @@ class ShowProduct extends Component {
       <div>
         Single product
         {this.props.product ? this.renderProduct() : null}
-        <div>
-          {this.renderCommentForm()}
-          {this.props.comments ? console.log(this.props.comments) : null}
-          {/* <Comment /> */}
-        </div>
+        <div>{this.renderCommentForm()}</div>
+        {this.props.comments ? this.renderComments() : null}
       </div>
     );
   }
