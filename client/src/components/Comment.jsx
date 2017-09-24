@@ -1,17 +1,9 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import * as actions from '../actions';
 
 class Comment extends Component {
   render() {
-    return;
+    return <div>{this.props.content}</div>;
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    comments: state.comment.comments
-  };
-}
-
-export default connect(mapStateToProps, actions)(Comment);
+export default Comment;

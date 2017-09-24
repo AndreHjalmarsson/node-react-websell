@@ -36,7 +36,22 @@ class ShowProduct extends Component {
 
   handleCommentForm(event) {
     event.preventDefault();
-    this.props.addComment(this.textInput.value, this.props.match.params.id);
+    this.props.addComment(
+      this.textInput.value,
+      this.props.match.params.id,
+      this.props.getComments(this.props.match.params.id)
+    );
+  }
+
+  renderComments() {
+    return this.props.comments.map(comment => {
+      const { _id, content } = comment;
+      return (
+        <div key={_id}>
+          <Comment content={content} />
+        </div>
+      );
+    });
   }
 
   render() {
