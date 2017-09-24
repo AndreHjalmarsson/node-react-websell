@@ -178,15 +178,17 @@ export function deleteProduct(id, callback) {
   };
 }
 
-export function addComment(content, productId) {
+export function addComment(content, productId, callback) {
   return dispatch => {
-    axios.post(
-      `${ROOT_URL}/addcomment`,
-      { content, productId },
-      {
-        headers: { authorization: localStorage.getItem('token') }
-      }
-    );
+    axios
+      .post(
+        `${ROOT_URL}/addcomment`,
+        { content, productId },
+        {
+          headers: { authorization: localStorage.getItem('token') }
+        }
+      )
+      .then(() => callback());
   };
 }
 

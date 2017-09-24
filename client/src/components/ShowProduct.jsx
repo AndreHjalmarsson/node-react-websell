@@ -39,7 +39,9 @@ class ShowProduct extends Component {
     this.props.addComment(
       this.textInput.value,
       this.props.match.params.id,
-      this.props.getComments(this.props.match.params.id)
+      () => {
+        this.props.getComments(this.props.match.params.id);
+      }
     );
   }
 
