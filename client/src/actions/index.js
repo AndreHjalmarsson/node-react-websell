@@ -118,7 +118,7 @@ export function getProduct(id) {
   };
 }
 
-export function addToCart(productId) {
+export function addToCart(productId, callback) {
   return dispatch => {
     axios
       .post(`${ROOT_URL}/addtocart/${productId}`, null, {
@@ -126,6 +126,7 @@ export function addToCart(productId) {
       })
       .then(response => {
         dispatch({ type: CART_ADD, payload: response.data });
+        callback();
       });
   };
 }

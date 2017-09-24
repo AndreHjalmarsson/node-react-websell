@@ -64,7 +64,9 @@ class ProductCard extends Component {
   }
 
   handleSubmit() {
-    this.props.addToCart(this.props.id);
+    this.props.addToCart(this.props.id, () => {
+      this.props.fetchCart();
+    });
   }
 
   renderButtonText() {
