@@ -14,9 +14,7 @@ import EditProduct from './EditProduct.jsx';
 
 import styled from 'styled-components';
 
-const HeaderStyle = styled.div`
-  background-color: grey;
-`
+const HeaderStyle = styled.div`background-color: grey;`;
 
 export default class App extends Component {
   render() {
