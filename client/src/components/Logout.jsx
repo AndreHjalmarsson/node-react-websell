@@ -3,17 +3,12 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 
 class Logout extends Component {
-
   componentWillMount() {
     this.props.logoutUser();
   }
 
   render() {
-    return (
-      <div>
-        Until next time...
-      </div>
-    );
+    return <div>Until next time...</div>;
   }
 }
 
