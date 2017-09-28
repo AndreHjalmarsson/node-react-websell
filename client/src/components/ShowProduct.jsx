@@ -47,10 +47,10 @@ class ShowProduct extends Component {
 
   renderComments() {
     return this.props.comments.map(comment => {
-      const { _id, content, author } = comment;
+      const { _id, content, author: { name, email } } = comment;
       return (
         <div key={_id}>
-          <Comment content={content} author={author} />
+          <Comment content={content} author={name} />
         </div>
       );
     });

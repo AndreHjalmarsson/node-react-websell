@@ -11,6 +11,14 @@ const commentSchema = new mongoose.Schema({
   }
 });
 
+function autopop(next) {
+  this.populate('author');
+  next();
+}
+
+commentSchema.pre('findOne', autopop);
+commentSchema.pre('find', autopop);
+
 const CommentModel = mongoose.model('Comment', commentSchema);
 
 module.exports = CommentModel;
