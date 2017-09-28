@@ -12,6 +12,5 @@ exports.getComments = async (req, res) => {
   const comments = await Comment.find({
     productId: req.params.id
   });
-  console.log(comments);
   res.send(comments);
 };
