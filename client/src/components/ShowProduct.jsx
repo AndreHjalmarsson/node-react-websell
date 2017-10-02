@@ -50,7 +50,7 @@ class ShowProduct extends Component {
       const { _id, content, author: { name, email } } = comment;
       return (
         <div key={_id}>
-          <Comment content={content} author={name} />
+          <Comment content={content} name={name} />
         </div>
       );
     });

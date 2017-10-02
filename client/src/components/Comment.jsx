@@ -5,7 +5,7 @@ class Comment extends Component {
     return (
       <div>
         {this.props.content}
-        {this.props.author}
+        {this.props.name}
       </div>
     );
   }
