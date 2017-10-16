@@ -11,6 +11,7 @@ import ShowProduct from './ShowProduct.jsx';
 import Cart from './Cart.jsx';
 import Profile from './Profile.jsx';
 import EditProduct from './EditProduct.jsx';
+import Footer from './Footer.jsx';
 
 import styled from 'styled-components';
 
@@ -35,6 +36,7 @@ export default class App extends Component {
             <Route path="/register" component={Register} />
             <Route path="/" component={Home} />
           </Switch>
+          <Footer />
         </div>
       </BrowserRouter>
     );
