@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+
 import * as actions from '../actions';
+import { ROOT_URL } from '../actions/index.js';
 
 class Header extends Component {
   componentDidMount() {
@@ -14,7 +16,8 @@ class Header extends Component {
     if (authed && this.props.currentUser) {
       return (
         <div>
-          <li className="nav-item pull-xs-right">
+          <ul className="nav navbar-nav">
+            {/* <li className="nav-item pull-xs-right">
             <Link to="/logout" className="nav-link">
               Logout
             </Link>
@@ -26,32 +29,36 @@ class Header extends Component {
             >
               Profle
             </Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/addproduct" className="nav-link">
-              Sell
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/cart" className="nav-link">
-              Cart
-            </Link>
-          </li>
+          </li> */}
+            <li className="nav-item">
+              <Link to="/addproduct" className="nav-link">
+                Sell
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/cart" className="nav-link">
+                Cart
+              </Link>
+            </li>
+          </ul>
+          <div className="profile pull-xs-right">hej</div>
         </div>
       );
     } else {
       return (
         <div>
-          <li className="nav-item">
-            <Link to="/login" className="nav-link">
-              Login
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/register" className="nav-link">
-              Register
-            </Link>
-          </li>
+          <ul className="nav navbar-nav">
+            <li className="nav-item">
+              <Link to="/login" className="nav-link">
+                Login
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/register" className="nav-link">
+                Register
+              </Link>
+            </li>
+          </ul>
         </div>
       );
     }
@@ -59,12 +66,14 @@ class Header extends Component {
 
   render() {
     return (
-      <nav className="navbar navbar-light">
-        <Link className="navbar-brand" to="/">
-          WebSell
-        </Link>
-        <ul className="nav navbar-nav">{this.renderLinks()}</ul>
-      </nav>
+      <div>
+        <nav className="navbar navbar-light">
+          <Link className="navbar-brand" to="/">
+            WebSell
+          </Link>
+          {this.renderLinks()}
+        </nav>
+      </div>
     );
   }
 }
