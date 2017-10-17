@@ -1,9 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 import * as actions from '../actions';
 import { ROOT_URL } from '../actions/index.js';
+
+const Img = styled.img`
+  max-width: 100%;
+  max-height: 100%;
+  cursor: pointer;
+  border-radius: 50%;
+`;
+const ImgWrapper = styled.div`
+  background-color: #ededed;
+  width: 36px;
+  height: 36px;
+`;
 
 class Header extends Component {
   componentDidMount() {
@@ -17,19 +30,6 @@ class Header extends Component {
       return (
         <div>
           <ul className="nav navbar-nav">
-            {/* <li className="nav-item pull-xs-right">
-            <Link to="/logout" className="nav-link">
-              Logout
-            </Link>
-          </li>
-          <li className="nav-item pull-xs-right">
-            <Link
-              to={`/user/${this.props.currentUser._id}`}
-              className="nav-link"
-            >
-              Profle
-            </Link>
-          </li> */}
             <li className="nav-item">
               <Link to="/addproduct" className="nav-link">
                 Sell
@@ -41,7 +41,31 @@ class Header extends Component {
               </Link>
             </li>
           </ul>
-          <div className="profile pull-xs-right">hej</div>
+          <div className="profile pull-xs-right">
+            <Link to={`/user/${this.props.currentUser._id}`}>
+              <ImgWrapper>
+                <Img
+                  src={`${ROOT_URL}/images/websell-profile.png`}
+                  alt={'no photo'}
+                />
+              </ImgWrapper>
+            </Link>
+            <div>
+              <li className="nav-item pull-xs-right">
+                <Link to="/logout" className="nav-link">
+                  Logout
+                </Link>
+              </li>
+              <li className="nav-item pull-xs-right">
+                <Link
+                  className="nav-link"
+                  to={`/user/${this.props.currentUser._id}`}
+                >
+                  Profle
+                </Link>
+              </li>
+            </div>
+          </div>
         </div>
       );
     } else {
