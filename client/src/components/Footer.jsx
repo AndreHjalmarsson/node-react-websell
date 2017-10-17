@@ -2,6 +2,6 @@ import React, { Component } from 'react';
 
 export default class Footer extends Component {
   render() {
-    return <div>Hejsan</div>;
+    return <div>Contact us ©</div>;
   }
 }
