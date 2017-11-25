@@ -30,7 +30,7 @@ class EditProduct extends Component {
         <div>
           {this.props.product
             ? this.renderProductForm()
-            : 'No such product found....'}
+            : 'No such product found...'}
         </div>
       </div>
     );
