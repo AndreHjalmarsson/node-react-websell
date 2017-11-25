@@ -17,6 +17,7 @@ const ImgWrapper = styled.div`
   width: 36px;
   height: 36px;
 `;
+const HideList = styled.div`display: none;`;
 
 class Header extends Component {
   componentDidMount() {
@@ -50,7 +51,7 @@ class Header extends Component {
                 />
               </ImgWrapper>
             </Link>
-            <div>
+            <HideList className="hejsan">
               <li className="nav-item pull-xs-right">
                 <Link to="/logout" className="nav-link">
                   Logout
@@ -64,7 +65,7 @@ class Header extends Component {
                   Profle
                 </Link>
               </li>
-            </div>
+            </HideList>
           </div>
         </div>
       );
@@ -101,6 +102,8 @@ class Header extends Component {
     );
   }
 }
+const hej = document.querySelector('.hejsan');
+console.log(hej);
 
 function mapStateToProps(state) {
   return {
